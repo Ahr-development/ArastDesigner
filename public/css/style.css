@@ -1,0 +1,4110 @@
+/* ---------------------- 
+Stylesheet Guide
+-------------------------
+
+MATERIAL ICONS
+LOADER
+GENERAL STYLES
+PAGE STRUCTURE
+TOP BAR
+DROPDOWN
+CONTENT BAR
+ICON MENU
+CONTENT
+LAYERS
+GRID
+ELEMENTS
+BUTTONS
+BLOCKS
+TOOLTIP
+PAGINATION
+ACCORDION
+RANGESLIDER
+COUNTER
+CONTROLS
+COLORPICKER
+SELECT
+TABS
+TOGGLE
+CHECKBOX
+CUSTOM CURSOR
+MODAL
+TEMPLATE LIBRARY
+MEDIA LIBRARY
+SVG LIBRARY
+MASONRY
+FRONT-END EDITOR
+MEDIA QUERIES
+
+*/
+
+
+@font-face {
+    font-family: "MainFont";
+    src: url("../font/pinar/PINAR-DS3-REGULAR.TTF");
+}
+
+@font-face {
+    font-family: "FaNum";
+    src: url("../font/IRANSans\(FaNum\).ttf");
+}
+
+
+/* ================= LOADER ================== */
+
+.Arast-loader-inner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999999999;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+.Arast-loader-wrap.hide {
+    display: none !important;
+}
+
+.Arast-loader {
+    box-sizing: border-box;
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+    -webkit-animation: ArastSpin 1s infinite linear;
+    animation: ArastSpin 1s infinite linear;
+    top: 50%;
+    position: absolute;
+    left: 37%;
+    bottom: 50%;
+    right: 50%;
+}
+
+@-webkit-keyframes ArastSpin {
+    100% {
+        transform: rotate(360deg)
+    }
+}
+
+@keyframes ArastSpin {
+    100% {
+        transform: rotate(360deg)
+    }
+}
+
+/* ================= GENERAL STYLES ================== */
+
+*,
+*::after,
+*::before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+* {
+    scrollbar-width: thin;
+
+}
+
+*::-webkit-scrollbar {
+    width: 14px;
+}
+
+*::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+}
+
+html,
+body {
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-size: 1rem;
+    line-height: 1.6;
+    overflow: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+button,
+input,
+label,p,div {
+    font-family: 'MainFont' !important;
+    margin: 0 0 0px 0;
+    line-height: 1.2;
+    font-weight: 700;
+}
+
+h1 {
+    font-size: 2rem
+}
+
+h2 {
+    font-size: 1.85rem
+}
+
+h3 {
+    font-size: 1.7rem
+}
+
+h4 {
+    font-size: 1.55rem
+}
+
+h5 {
+    font-size: 1.4rem
+}
+
+h6 {
+    font-size: 1.25rem
+}
+
+p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0 0 15px 0;
+}
+
+select:disabled,
+input:disabled,
+button:disabled {
+    pointer-events: none !important;
+}
+
+.input-hidden {
+    position: absolute;
+    left: -9999px;
+}
+
+#Arast-icon-panel hr {
+    display: block;
+    border: none;
+    margin: 25px 0;
+}
+
+.d-none {
+    display: none !important;
+}
+
+.d-block {
+    display: block !important;
+}
+
+#Arast-custom-element-options,
+#Arast-noframes,
+#Arast-noelements,
+#Arast-noicons,
+#Arast-text-settings,
+#Arast-image-settings,
+#Arast-shape-settings,
+#shape-gradient-settings,
+#text-gradient-settings,
+#element-gradient-settings,
+#Arast-custom-shape,
+#Arast-brush-pattern-width,
+#Arast-brush-pattern-distance,
+#shape-custom-width-wrap {
+    display: none;
+}
+
+#Arast-noicons {
+    margin-top: 0;
+}
+
+#Arast-custom-shape {
+    margin-top: 20px;
+}
+
+.notice {
+    display: block;
+    padding: 12px 15px;
+    border-radius: 4px;
+    font-weight: 700;
+    margin: 15px 0;
+}
+
+.notice h6 {
+    margin-bottom: 0.5rem;
+}
+
+.Arast-img-wrap {
+    position: relative;
+    min-height: 120px;
+    width: 100%;
+}
+
+.Arast-frame .Arast-img-wrap {
+    min-height: 60px;
+}
+
+.Arast-img-loader {
+    box-sizing: border-box;
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    -webkit-animation: ArastSpin 1s infinite linear;
+    animation: ArastSpin 1s infinite linear;
+    z-index: 1;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    content: '';
+    margin: -15px 0 0 -15px;
+}
+
+
+/* ================= PAGE STRUCTURE ================== */
+
+#Arast-body {
+    position: relative;
+    height: 100vh;
+    margin: 0;
+    padding: 60px 200px 0 415px;
+    background-color: #f4f2f2;
+}
+
+body.panel-closed #Arast-body {
+    padding-left: 75px;
+}
+
+body.layers-closed #Arast-body {
+    padding-right: 0;
+}
+
+.Arast-wrap {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.Arast-inner-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+#Arast-toggle-left,
+#Arast-toggle-right {
+    position: fixed;
+    height: 60px;
+    top: 50%;
+    transform: translateY(-30px);
+    z-index: 10;
+    width: 22px;
+    cursor: pointer;
+    text-align: center;
+}
+
+#Arast-toggle-left {
+    left: 414px;
+    border-left: none !important;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+#Arast-toggle-right {
+    right: 199px;
+    border-right: none !important;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    z-index: 8;
+}
+
+#Arast-toggle-left.closed {
+    display: none !important;
+}
+
+#Arast-toggle-right.closed {
+    right: 0;
+}
+
+#Arast-toggle-left .material-icons,
+#Arast-toggle-right .material-icons {
+    font-size: 22px;
+    line-height: 60px;
+    text-align: center;
+    transition: color 0.2s ease-in-out;
+}
+
+/* ================= TOP BAR ================== */
+
+#Arast-top-bar {
+    display: flex;
+    width: 100%;
+    height: 60px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding: 0;
+    align-items: center;
+    z-index: 99;
+}
+
+.Arast-top-bar-menu {
+    margin-left: auto;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+}
+
+.Arast-top-bar-menu>div {
+    margin-left: 10px;
+}
+
+.Arast-logo {
+    padding: 15px;
+    height: 60px;
+}
+
+.Arast-logo img {
+    height: 100%;
+    width: auto;
+}
+
+.Arast-logo img.logo-desktop {
+    display: block;
+}
+
+.Arast-logo img.logo-mobile {
+    display: none;
+}
+
+/* ================= DROPDOWN ================== */
+
+.ArastProfile {
+    margin-top: 59px;
+    max-width: max-content;
+    float: inline-end;
+    background-color: white;
+    padding: 18px;
+    position: absolute;
+    z-index: 17;
+    left: auto;
+    right: 0px;
+}
+
+
+#Arast-user-menu {
+    display: flex;
+    align-items: center;
+}
+
+#Arast-user-menu img {
+    width: 32px;
+    height: auto;
+    vertical-align: bottom;
+    border-radius: 100%;
+}
+
+.Arast-dropdown-wrap {
+    position: relative;
+    cursor: pointer;
+}
+
+ul.Arast-dropdown {
+    position: absolute;
+    top: 42px;
+    right: 0;
+    width: 200px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    z-index: 9;
+    border-radius: 4px;
+
+}
+
+ul.Arast-dropdown li {
+    padding: 10px;
+}
+
+ul.Arast-dropdown li:last-child {
+    border: none !important;
+}
+
+ul.Arast-dropdown li a {
+    display: block;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    transition: color 0.2s ease-in-out;
+}
+
+ul.Arast-dropdown li a .material-icons {
+    font-size: 15px;
+    width: 22px;
+}
+
+.Arast-dropdown-wrap>.material-icons {
+    transition: transform 0.2s linear;
+    transform: rotate(0);
+}
+
+.Arast-dropdown-wrap.opened>.material-icons {
+    transform: rotate(180deg);
+}
+
+/* ================= CONTENT BAR ================== */
+
+.Arast-content-bar {
+    position: fixed;
+    display: flex;
+    bottom: 20px;
+    right: 220px;
+    padding: 0 25px;
+    border-radius: 100px;
+    align-items: center;
+    overflow: hidden;
+    z-index: 10;
+    visibility: visible;
+}
+
+body.layers-closed .Arast-content-bar {
+    right: 20px;
+}
+
+.Arast-content-bar .Arast-img-size {
+    line-height: 40px;
+    padding-right: 15px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    font-family: 'FaNum' !important;
+}
+
+.Arast-img-size .material-icons {
+    font-size: 10px;
+}
+
+.Arast-content-bar .Arast-counter {
+    align-items: center;
+    margin-left: 0;
+    max-width: 105px;
+    padding: 0 20px 0 10px;
+    position: relative;
+    height: 40px;
+}
+
+.Arast-content-bar .Arast-counter .Arast-btn,
+.Arast-content-bar .Arast-counter .Arast-btn:hover,
+.Arast-content-bar .Arast-counter .Arast-btn:focus {
+    min-width: 15px;
+}
+
+.Arast-content-bar .Arast-counter .Arast-btn .material-icons {
+    font-size: 16px;
+}
+
+.Arast-counter .Arast-btn:disabled {
+    opacity: 1;
+}
+
+.Arast-content-bar .Arast-counter .Arast-form-field {
+    border: none !important;
+    background: transparent !important;
+    font-weight: 700;
+    margin-top: 3px;
+}
+
+.Arast-content-bar .Arast-counter:after {
+    font-family: 'Material Icons';
+    content: 'percent';
+    position: absolute;
+    right: -25px;
+    line-height: 40px;
+    top: 0;
+    bottom: 0;
+    padding: 0 10px;
+    font-size: 12px;
+}
+
+#Arast-img-drag {
+    padding: 0 10px;
+    align-self: stretch;
+    border-radius: 0;
+}
+
+#Arast-img-drag .material-icons {
+    margin: 0;
+    font-size: 16px;
+}
+
+/* ================= ICON MENU ================== */
+
+#Arast-icon-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 75px;
+    display: flex;
+    flex-direction: column;
+    padding: 60px 0 0 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 11;
+    height: 100%;
+}
+
+button.Arast-icon-menu-btn {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    padding: 12px 0;
+    cursor: pointer;
+    height: auto;
+    margin: 0;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    border-radius: 0;
+    transition: color 0.2s ease-in-out;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.Arast-icon-menu-title {
+    font-size: 0.9rem;
+    padding-top: 6px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+button.Arast-icon-menu-btn.stick-to-bottom {
+    margin-top: auto;
+}
+
+button.Arast-icon-menu-btn .material-icons {
+    font-size: 22px;
+}
+
+#Arast-icon-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 415px;
+    padding: 60px 0 0 75px;
+    overflow: hidden;
+    z-index: 10;
+    height: 100%;
+}
+
+#Arast-icon-panel-inner {
+    display: block;
+    overflow: auto;
+    height: 100%;
+    padding: 25px;
+}
+
+.Arast-icon-panel-content.panel-hide {
+    display: none !important;
+}
+
+.Arast-panel-inner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+}
+
+/* ================= CONTENT ================== */
+
+#Arast-content {
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#Arast .canvas-container {
+    z-index: 1;
+}
+
+.Arast-panel-subtitle {
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    margin-bottom: 20px
+}
+
+#Arast-canvas-img-wrap {
+    display: none;
+}
+
+#Arast-canvas-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+#Arast-canvas-wrap {
+    position: relative;
+    z-index: 9;
+    visibility: hidden;
+}
+
+#Arast-canvas-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    z-index: 99;
+    cursor: grab;
+}
+
+#Arast-canvas-loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 98;
+    display: none;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+#Arast-canvas-loader .Arast-loader {
+    width: 70px;
+    height: 70px;
+    border-width: 3px;
+}
+
+/* ================= LAYERS ================== */
+
+#Arast-right-col {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 200px;
+    overflow: auto;
+    z-index: 7;
+    height: 100%;
+    padding: 60px 0 0 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.Arast-layers-title {
+    padding: 15px 10px;
+    margin: 0;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+}
+
+.Arast-layers-title .material-icons {
+    font-size: 1.25rem;
+    margin-right: 5px;
+    margin-left: 6px;
+}
+
+#Arast-layers {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: block;
+}
+
+#Arast-layers li {
+    position: relative;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    font-weight: 700;
+    line-height: 46px;
+    height: 48px;
+    font-size: 1rem;
+    justify-content: space-between;
+    overflow: hidden;
+    transition: color 0.1s linear;
+    cursor: move;
+}
+
+#Arast-layers li .layer-icons {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    padding: 0 10px;
+    z-index: 9;
+    width: 80%;
+    display: none
+}
+
+#Arast-layers li .layer-icons a {
+    cursor: pointer;
+    height: 100%;
+    min-width: 0;
+    text-align: center;
+    width: 25%;
+}
+
+#Arast-layers li .layer-icons .material-icons {
+    font-size: 16px;
+    line-height: 46px;
+    cursor: pointer;
+    text-decoration: none;
+    outline: none;
+    opacity: 1;
+    transition: opacity 0.1s linear;
+}
+
+#Arast-layers li .layer-icons .material-icons:hover {
+    opacity: 0.8;
+}
+
+#Arast-layers li .layer-name {
+    width: 100%;
+    padding: 0 0 0 0;
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    font-size: 1rem;
+}
+
+#Arast-layers>li>.material-icons {
+    min-width: 30px;
+    text-align: center;
+    font-size: 18px;
+}
+
+#Arast-layers>li>.material-icons.layer-settings {
+    font-size: 16px;
+    width: 20%;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.1s linear;
+}
+
+#Arast-no-layer {
+    padding: 20px;
+    font-style: italic;
+    font-size: 0.9rem;
+}
+
+#Arast-no-layer a {
+    display: block;
+    text-align: right;
+    margin-top: 10px;
+    text-decoration: none;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 1rem;
+}
+
+#Arast-no-layer a:hover {
+    text-decoration: underline;
+}
+
+#Arast-layer-delete-wrap {
+    margin-top: auto;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+}
+
+#Arast-layer-delete-wrap .Arast-btn {
+    margin-left: 5px;
+    height: 34px;
+    padding: 0 10px;
+}
+
+#Arast-layer-delete-wrap .Arast-btn .material-icons {
+    margin: 0;
+    font-size: 16px
+}
+
+/* ================= GRID ================== */
+
+.Arast-grid {
+    position: relative;
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(auto-fill, minmax(min(80px, 100%), 1fr));
+    column-gap: 10px;
+    row-gap: 10px;
+}
+
+.Arast-grid.two-column {
+    grid-template-columns: repeat(auto-fill, minmax(min(100px, 100%), 1fr));
+}
+
+.Arast-grid.three-column {
+    grid-template-columns: repeat(auto-fill, minmax(min(60px, 100%), 1fr));
+}
+
+.Arast-grid.four-column {
+    grid-template-columns: repeat(auto-fill, minmax(min(50px, 100%), 1fr));
+}
+
+.Arast-grid.five-column {
+    grid-template-columns: repeat(auto-fill, minmax(min(50px, 100%), 1fr));
+    column-gap: 5px;
+    row-gap: 5px;
+}
+
+.Arast-grid.template-grid {
+    grid-template-columns: repeat(auto-fill, minmax(min(120px, 100%), 1fr));
+    min-height: 80px;
+}
+
+.Arast-frames-grid .grid-item,
+.Arast-grid .grid-item {
+    position: relative;
+    cursor: pointer;
+}
+
+.Arast-frames-grid img,
+.Arast-grid img {
+    vertical-align: bottom;
+    width: 100%;
+    height: auto;
+}
+
+.Arast-grid.svg-library-grid,
+.Arast-grid.media-library-grid {
+    grid-template-columns: repeat(auto-fill, minmax(min(100px, 100%), 1fr));
+}
+
+.Arast-grid .Arast-masonry-item-inner {
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between
+}
+
+.Arast-grid .Arast-masonry-item {
+    height: 100%;
+}
+
+.Arast-grid .notice {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+}
+
+.Arast-frame,
+.Arast-element {
+    position: relative;
+    height: 100%;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    justify-content: center;
+}
+
+.type-customSVG>a:before {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    line-height: 1;
+    text-transform: none;
+    content: 'color_lens';
+    margin-right: 5px;
+    font-size: 1.1rem;
+}
+
+.template-favorite,
+.Arast-frame .frame-favorite,
+.Arast-element .element-favorite {
+    position: absolute;
+    right: -1px;
+    top: -1px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    z-index: 2;
+}
+
+.grid-item:hover .template-favorite,
+.Arast-frame:hover .frame-favorite,
+.Arast-element:hover .element-favorite {
+    visibility: visible;
+    opacity: 1;
+}
+
+.template-favorite {
+    right: 0px;
+    top: 0px;
+    width: 25px;
+    height: 25px;
+}
+
+.template-favorite>.Arast-btn-simple>.material-icons,
+.Arast-frame>.frame-favorite>.Arast-btn-simple>.material-icons,
+.Arast-element>.element-favorite>.Arast-btn-simple>.material-icons {
+    font-size: 18px;
+}
+
+.Arast-frames-grid .Arast-frame {
+    margin-top: 10px;
+    padding: 0;
+}
+
+.Arast-frames-grid {
+    margin-top: -10px;
+}
+
+#Arast-frame-favorites .Arast-frames-grid {
+    margin-top: 0;
+}
+
+.grid-icon-item {
+    text-decoration: none;
+    display: block;
+    border-radius: 4px;
+    transition: all 0.2s ease-in-out;
+}
+
+.grid-icon-item div {
+    width: 100%;
+    text-align: center;
+}
+
+.grid-icon-item .material-icons {
+    font-size: 36px;
+    padding: 10px 0;
+}
+
+.grid-icon-label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 700;
+    padding: 5px 0;
+}
+
+/* ================= ELEMENTS ================== */
+
+#Arast-filters.Arast-grid img {
+    border: 3px solid transparent;
+    border-radius: 0;
+    cursor: pointer;
+}
+
+#Arast-filters.Arast-grid .Arast-element,
+#Arast-filters.Arast-grid .Arast-element:hover {
+    border: none;
+}
+
+#Arast-filters.Arast-grid div label span {
+    display: block;
+    text-align: center;
+    padding: 5px 7px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    line-height: 1;
+    border-top-left-radius: 4px;
+}
+
+.Arast-element>.material-icons {
+    font-size: 26px;
+    line-height: 1.4;
+}
+
+/* ================= BUTTONS ================== */
+
+.Arast-btn-simple {
+    border: none !important;
+    background: none !important;
+    outline: none !important;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.Arast-btn {
+    padding: 8px 12px;
+    margin: 0;
+    line-height: 1.2;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Arast-btn.btn-full {
+    width: 100%;
+}
+
+.Arast-btn:disabled {
+    opacity: 0.7;
+}
+
+.Arast-btn .material-icons {
+    font-size: 0.9rem;
+    margin-right: 4px;
+}
+
+.btn-full {
+    width: 100%;
+}
+
+.Arast-btn.Arast-lg-btn {
+    padding: 12px;
+}
+
+#text-flip-y .material-icons,
+#Arast-flip-vertical .material-icons,
+#img-flip-vertical .material-icons {
+    transform: rotate(90deg);
+}
+
+#Arast-crop-btns.disabled {
+    pointer-events: none !important;
+    opacity: 0.5;
+}
+
+/* ================= BLOCKS ================== */
+
+.Arast-btn-group {
+    display: flex;
+}
+
+.icon-group .Arast-btn {
+    padding: 8px 0;
+    flex: 1;
+    border-radius: 0;
+}
+
+.icon-group .Arast-btn:last-child {
+    border: none !important;
+}
+
+.icon-group .Arast-btn .material-icons {
+    font-size: 21px;
+    margin: 0;
+}
+
+.Arast-aspect-ratio {
+    display: flex;
+    align-items: center;
+}
+
+.Arast-resize-wrap {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.Arast-aspect-ratio>.material-icons,
+.Arast-resize-wrap>.material-icons {
+    font-size: 12px;
+    min-width: 20px;
+    text-align: center;
+}
+
+.Arast-aspect-ratio .Arast-btn,
+.Arast-resize-wrap .Arast-btn {
+    margin-left: 10px;
+    padding: 0;
+    height: 34px;
+    min-width: 34px;
+}
+
+.Arast-aspect-ratio .Arast-btn .material-icons,
+.Arast-resize-wrap .Arast-btn .material-icons {
+    font-size: 1rem;
+    margin: 0;
+}
+
+.Arast-btn-set {
+    display: flex;
+    align-items: center;
+}
+
+.Arast-btn-set .Arast-btn:first-child {
+    width: 100%
+}
+
+.Arast-btn-set .Arast-btn:last-child .material-icons {
+    margin: 0;
+    font-size: 16px;
+}
+
+.Arast-btn-set .Arast-btn:last-child {
+    margin-left: 5px;
+    min-width: 40px;
+}
+
+.Arast-select-btn-set {
+    display: flex;
+    align-items: stretch;
+}
+
+.Arast-select-btn-set .Arast-btn {
+    margin-left: 10px;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.Arast-select-btn-set .Arast-btn .material-icons {
+    margin: 0;
+    font-size: 16px;
+}
+
+.Arast-block-50 {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 20px
+}
+
+.Arast-block-50:last-child {
+    margin: 0
+}
+
+.Arast-block-50>* {
+    width: 50%;
+}
+
+.Arast-block-50>*:first-child {
+    margin-right: 5px;
+}
+
+.Arast-block-50>*:last-child {
+    margin-left: 5px;
+}
+
+.Arast-block-50 .Arast-btn {
+    height: 34px;
+}
+
+.Arast-block-33 {
+    display: flex;
+    align-items: flex-end;
+}
+
+.Arast-block-33>div {
+    flex: 1
+}
+
+.Arast-block-33>div:first-child {
+    margin-right: 10px;
+}
+
+.Arast-block-33>div:last-child {
+    margin-left: 10px;
+}
+
+.Arast-block-50 label,
+.Arast-block-33 label {
+    font-weight: 700;
+    margin: 0 0 5px 0 !important;
+    display: block;
+}
+
+/* ================= TOOLTIP ================== */
+
+.tooltip {
+    position: relative;
+}
+
+.tooltip:after {
+    content: attr(data-title);
+    font-size: 0.9rem;
+    position: absolute;
+    padding: 7px 10px;
+    bottom: -10px;
+    left: 50%;
+    white-space: nowrap;
+    opacity: 0;
+    z-index: 99999;
+    visibility: hidden;
+    transform: translateX(-50%) translateY(100%);
+    text-transform: none;
+    font-weight: 700;
+    border-radius: 2px;
+    line-height: 1.2;
+}
+
+.tooltip:before {
+    border: solid;
+    border-width: 0 6px 6px 6px;
+    bottom: -10px;
+    content: "";
+    left: 50%;
+    position: absolute;
+    z-index: 99999;
+    visibility: hidden;
+    transform: translateX(-50%);
+}
+
+.tooltip:hover:after,
+.tooltip:hover:before {
+    opacity: 1;
+    transition: all 0.1s ease 0.5s;
+    visibility: visible;
+}
+
+.tooltip.tooltip-top:after {
+    top: -10px;
+    bottom: auto;
+    transform: translateX(-50%) translateY(-100%);
+}
+
+.tooltip.tooltip-top:before {
+    border-width: 6px 6px 0 6px;
+    top: -10px;
+    bottom: auto;
+}
+
+/* ================= PAGINATION ================== */
+
+.Arast-pagination ul {
+    list-style: none;
+    margin: 30px 0 0 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.Arast-pagination ul li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 3px;
+    padding: 0;
+    font-size: 1rem;
+    line-height: 30px;
+    min-width: 30px;
+    font-weight: 700;
+    border-radius: 4px;
+}
+
+.Arast-pagination ul li.disabled {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.Arast-pagination ul li .material-icons {
+    font-size: 1rem;
+    line-height: 30px;
+    margin: 0;
+    padding: 0;
+    display: block;
+}
+
+.Arast-pagination ul li a {
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    text-align: center
+}
+
+.Arast-accordion .Arast-pagination ul {
+    margin: 20px 0 0 0;
+    justify-content: center;
+}
+
+.Arast-accordion .Arast-pagination ul li {
+    margin: 0;
+    padding: 0;
+    font-size: 0.9rem;
+    line-height: 1;
+    min-width: 0;
+    border: none;
+    border-radius: 0;
+}
+
+.Arast-accordion .Arast-pagination ul li .material-icons {
+    font-size: 0.9rem;
+    line-height: 1;
+}
+
+.Arast-accordion .Arast-pagination ul li a,
+.Arast-accordion .Arast-pagination ul li>span {
+    padding: 7px;
+}
+
+/* ================= ACCORDION ================== */
+
+ul.Arast-accordion {
+    margin: 0 0 25px 0;
+    padding: 0;
+    list-style: none;
+    border-bottom: none;
+}
+
+ul.Arast-accordion>li {
+    margin: 0 0 10px 0;
+    padding: 0;
+    border-radius: 4px;
+}
+
+ul.Arast-accordion>li>div {
+    padding: 20px;
+    display: none;
+}
+
+ul.Arast-accordion>li.opened>div {
+    display: block;
+}
+
+ul.Arast-accordion>li>a {
+    font-family: 'Roboto Condensed', sans-serif;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: color 0.2s ease-in-out;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+    padding: 8px 5px 8px 10px;
+    cursor: pointer;
+}
+
+ul.Arast-accordion>li>a>.arrow {
+    transform: rotate(0deg);
+    font-size: 20px;
+}
+
+ul.Arast-accordion>li.opened>a>.arrow {
+    transform: rotate(180deg);
+}
+
+ul.Arast-accordion>li>a>.arrow {
+    margin-left: auto;
+}
+
+.material-icons.accordion-icon {
+    font-size: 1.1rem;
+    margin-right: 5px;
+}
+
+ul.Arast-accordion>li>a>.data-count {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.1;
+    font-size: 0.8rem;
+    padding: 2px 4px;
+    border-radius: 4px;
+    margin-left: auto;
+    margin-right: 5px;
+}
+
+#Arast-frames ul.Arast-accordion>li>a>.arrow,
+#Arast-elements ul.Arast-accordion>li>a>.arrow {
+    margin-left: 0;
+}
+
+/* ================= RANGESLIDER ================== */
+
+.Arast-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 3px;
+    outline: none;
+    opacity: 1;
+}
+
+.Arast-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+    border: none;
+    box-shadow: none;
+    border-radius: 100%;
+}
+
+.Arast-slider::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+    border: none;
+    box-shadow: none;
+    border-radius: 100%;
+}
+
+/* ================= COUNTER ================== */
+
+.Arast-counter {
+    display: flex;
+    align-items: stretch;
+    max-width: 120px;
+    margin-left: auto;
+}
+
+.Arast-counter .Arast-btn,
+.Arast-counter .Arast-btn:hover,
+.Arast-counter .Arast-btn:focus {
+    padding: 0;
+    border-radius: 0;
+    min-width: 30px;
+}
+
+.Arast-counter .Arast-btn .material-icons {
+    margin: 0;
+}
+
+.Arast-counter .Arast-form-field {
+    text-align: center;
+}
+
+.Arast-control-wrap.label-block .Arast-counter {
+    max-width: 100%;
+}
+
+/* ================= CONTROLS ================== */
+
+.Arast-control-wrap {
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+    align-items: center;
+}
+
+.Arast-control-wrap.hidden {
+    display: none;
+}
+
+.Arast-accordion .conditional-settings .Arast-control-wrap,
+.Arast-accordion .conditional-settings .Arast-control-wrap:first-child,
+.Arast-control-wrap {
+    margin-top: 15px;
+}
+
+#Arast-qrcode-settings .Arast-control-wrap:first-child,
+#Arast-settings .Arast-control-wrap:first-child,
+.Arast-accordion .Arast-control-wrap:first-child {
+    margin-top: 0;
+}
+
+.Arast-control-wrap.nomargin {
+    margin-bottom: 0;
+}
+
+.Arast-control-wrap.label-block {
+    flex-direction: column;
+}
+
+.Arast-control-label,
+.Arast-control {
+    width: 50%;
+    min-width: 50%;
+}
+
+.Arast-control-label {
+    padding: 0 10px 0 0;
+    font-size: 1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+}
+
+.Arast-control-wrap.label-block .Arast-control-label {
+    padding: 0;
+}
+
+.Arast-control-label span {
+    font-family: 'Roboto', sans-serif;
+    margin-left: auto;
+    line-height: 1;
+    padding: 4px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.Arast-control-wrap.label-block .Arast-control-label,
+.Arast-control-wrap.label-block .Arast-control {
+    width: 100%;
+    min-width: 100%;
+}
+
+.Arast-control-wrap.label-block .Arast-control-label {
+    margin-bottom: 5px;
+}
+
+.Arast-control-wrap.label-block .Arast-control-label.slider-label {
+    margin-bottom: 0;
+}
+
+.Arast-control-desc {
+    font-size: 0.9rem;
+    font-style: italic;
+    padding-top: 5px;
+}
+
+#Arast-draw-settings,
+#eraser-width-wrap {
+    display: none;
+}
+
+.Arast-form-field {
+    font-family: 'Roboto', sans-serif;
+    width: 100%;
+    padding: 7px;
+    outline: none;
+    box-shadow: none;
+    font-size: 1rem;
+    line-height: 1.3;
+}
+
+.Arast-form-field:disabled {
+    opacity: 0.7;
+}
+
+.Arast-hidden-file {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.Arast-hidden-file+label * {
+    pointer-events: none;
+}
+
+.Arast-search-box {
+    display: flex;
+}
+
+.Arast-search-box button {
+    margin-left: 5px;
+}
+
+.Arast-search-box button .material-icons {
+    margin: 0;
+    font-size: 16px;
+}
+
+.Arast-search-wrap {
+    position: relative;
+    display: flex;
+    margin-bottom: 25px;
+}
+
+.Arast-search-wrap .material-icons {
+    position: absolute;
+    top: 12px;
+    right: 10px;
+    line-height: 1;
+    font-size: 18px;
+    z-index: 9;
+}
+
+.Arast-search-wrap .Arast-form-field {
+    padding: 11px 40px 11px 11px;
+    border-radius: 4px;
+}
+
+#Arast-element-search-icon.cancel,
+#Arast-icon-search-icon.cancel {
+    cursor: pointer;
+}
+
+.Arast-sub-settings {
+    margin-top: 25px;
+    padding-top: 10px;
+}
+
+.Arast-accordion .Arast-sub-settings {
+    margin-top: 20px;
+    padding-top: 20px;
+}
+
+.Arast-sub-settings.nomargin {
+    margin-top: 0px;
+    padding-top: 0px;
+    border: none;
+}
+
+.sp-colorize-container {
+    width: 40px !important;
+}
+
+.Arast-submit-btns {
+    display: flex;
+}
+
+.Arast-submit-btns .Arast-btn {
+    width: 50%;
+}
+
+.Arast-submit-btns .Arast-btn:first-child {
+    margin-right: 5px;
+}
+
+.Arast-submit-btns .Arast-btn:last-child {
+    margin-left: 5px;
+}
+
+.Arast-control-group {
+    display: flex;
+    align-items: flex-end;
+}
+
+.Arast-control-group>div {
+    width: 25%;
+    margin-right: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.Arast-control-group>div:last-child {
+    margin-right: 0;
+}
+
+.Arast-control-group .Arast-btn {
+    height: 34px;
+    width: 100%;
+}
+
+.Arast-control-group label {
+    padding: 0 0 5px 0;
+    font-weight: 700
+}
+
+#Arast-preferences {
+    margin-bottom: 20px;
+}
+
+/* ================= COLORPICKER ================== */
+
+.sp-original-input-container {
+    display: flex;
+    margin-left: auto !important;
+    height: 34px;
+}
+
+.Arast-colorpicker,
+.Arast-colorpicker:focus,
+.Arast-form-field {
+    width: 100%;
+    padding: 7px;
+    outline: none;
+    box-shadow: none;
+    color: #aaa;
+    font-size: 1rem;
+}
+
+.sp-clear-display {
+    background-image: none;
+}
+
+.sp-clear-enabled .sp-clear {
+    top: 0;
+}
+
+.sp-clear-display:before {
+    font-family: 'Material Icons';
+    content: 'block';
+    line-height: 14px;
+    font-size: 14px;
+}
+
+/* ================= SELECT ================== */
+
+.Arast-select {
+    border-radius: 0;
+    cursor: pointer;
+    height: 34px;
+    border-radius: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 100%;
+    padding: 5px 30px 5px 5px;
+    outline: none;
+    font-size: 1rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.Arast-select:disabled {
+    opacity: 0.7;
+}
+
+.Arast-select:focus {
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075), 0 0 0 0 rgba(50, 151, 211, 0.5);
+}
+
+.select2-container {
+    z-index: 99999;
+}
+
+.select2-container--dark {
+    max-width: 100%;
+}
+
+.select2-container--dark .select2-selection--single {
+    border: 0px;
+    height: 34px;
+}
+
+.select2-container--dark .select2-selection--single .select2-selection__rendered {
+    line-height: 32px;
+}
+
+.select2-container--dark .select2-selection--single .select2-selection__arrow {
+    height: 28px;
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    width: 20px;
+}
+
+.select2-container--dark .select2-selection--single .select2-selection__arrow b {
+    top: 60%;
+    border-style: solid;
+    border-width: 5px 4px 0 4px;
+    height: 0;
+    left: 50%;
+    margin-left: -4px;
+    margin-top: -2px;
+    position: absolute;
+    width: 0;
+}
+
+.select2-container--dark .select2-selection--single .select2-selection__clear {
+    cursor: pointer;
+    float: right;
+    font-weight: bold;
+}
+
+.select2-container--dark .select2-selection--single {
+    border-radius: 0px;
+}
+
+.select2-container--dark.select2-container--open .select2-selection__arrow b {
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+}
+
+.select2-container--dark span.select2-search input {
+    height: 30px !important;
+}
+
+.select2-drop {
+    margin-top: -2px;
+    border-top: 0;
+    border-radius: 0px !important;
+    -webkit-border-radius: 0 0 6px 6px;
+    -moz-border-radius: 0 0 6px 6px;
+    border-radius: 0 0 6px 6px;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+.select2-drop.select2-drop-above {
+    margin-top: 2px;
+    border-bottom: 0;
+    -webkit-border-radius: 6px 6px 0 0;
+    -moz-border-radius: 6px 6px 0 0;
+    border-radius: 6px 6px 0 0;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+.select2-container--dark .select2-search {
+    margin-top: 3px;
+}
+
+.select2-container--dark .select2-search input {
+    height: 26px;
+    outline: none;
+}
+
+.select2-container--dark .select2-search--dropdown {
+    padding: 5px;
+}
+
+.select2-container--dark .select2-results__group {
+    display: block;
+    padding: 10px 5px 5px 5px;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+}
+
+.select2-container--dark .select2-results__option {
+    padding: 5px;
+    line-height: 1.2;
+    border-radius: 2px;
+}
+
+.select2-container--dark .select2-item {
+    display: flex;
+    align-items: center;
+}
+
+.select2-container--dark .material-icons {
+    font-size: 1rem;
+    margin-right: 5px;
+}
+
+.select2-results>.select2-results__options {
+    max-height: 250px;
+    overflow: auto;
+}
+
+/* ================= TABS ================== */
+
+.Arast-tabs {
+    position: relative;
+}
+
+.Arast-tabs .Arast-tab {
+    display: none;
+}
+
+.Arast-tabs .Arast-tab.active {
+    display: block;
+}
+
+.Arast-tabs-menu {
+    margin: 0 0 20px 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+}
+
+.Arast-tabs-menu li {
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    font-size: 1rem;
+    margin: 0;
+    padding: 5px 10px;
+    line-height: 1.2;
+    border-radius: 2px;
+    cursor: pointer;
+    font-family: 'MainFont' !important;
+
+}
+
+.Arast-tabs-menu li .material-icons {
+    font-size: 1.1rem;
+    margin-right: 5px;
+}
+
+/* ================= TOGGLE ================== */
+
+.Arast-toggle {
+    cursor: pointer;
+    display: inline-block;
+}
+
+.Arast-toggle-switch {
+    display: inline-block;
+    border-radius: 20px;
+    width: 40px;
+    height: 20px;
+    position: relative;
+    vertical-align: middle;
+    transition: background 0.25s;
+}
+
+.Arast-toggle-switch:before,
+.Arast-toggle-switch:after {
+    content: "";
+}
+
+.Arast-toggle-switch:before {
+    display: block;
+    border-radius: 50%;
+    width: 14px;
+    height: 14px;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    transition: left 0.25s;
+}
+
+.Arast-toggle-checkbox:checked+.Arast-toggle-switch:before {
+    left: 22px;
+}
+
+.Arast-toggle-checkbox {
+    position: absolute;
+    visibility: hidden;
+}
+
+/* ================= CHECKBOX ================== */
+
+.Arast-checkbox {
+    display: block;
+    position: relative;
+    margin-bottom: 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.Arast-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.Arast-checkmark {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 20px;
+    width: 20px;
+    border-radius: 4px;
+}
+
+.Arast-checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.Arast-checkbox input:checked~.Arast-checkmark:after {
+    display: block;
+}
+
+.Arast-checkbox .Arast-checkmark:after {
+    left: 7px;
+    top: 3px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.Arast-checkbox-control,
+.Arast-toggle-control {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.Arast-checkbox-control {
+    padding-right: 20px
+}
+
+/* ================= CUSTOM CURSOR ================== */
+
+.tm-cursor-none,
+.tm-cursor-none * {
+    cursor: none !important;
+}
+
+.tm-cursor {
+    pointer-events: none;
+    position: fixed;
+    z-index: 9999999999;
+    top: 0;
+    left: 0;
+    display: block;
+    opacity: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: opacity 300ms linear, transform 300ms linear, background-color 300ms linear, border 300ms linear, border-radius 300ms linear;
+    visibility: hidden;
+}
+
+.tm-cursor.moving {
+    opacity: 1;
+}
+
+.tm-cursor:before {
+    pointer-events: none;
+    content: ' ';
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9999999999;
+    transition: opacity 300ms linear, transform 300ms linear, background-color 300ms linear, border 300ms linear, border-radius 300ms linear;
+}
+
+.tm-pointer-simple.tm-cursor {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    box-shadow: 0 0 12px rgba(16, 39, 112, 0.2);
+}
+
+/* ================= MODAL ================== */
+
+.Arast-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    display: none;
+}
+
+.Arast-modal-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100%;
+    padding: 4%;
+    overflow: auto
+}
+
+.Arast-modal-inner {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-radius: 4px;
+    max-width: 800px;
+    direction: rtl;
+}
+
+.Arast-modal-inner.large {
+    max-width: 1000px;
+}
+
+.Arast-modal-inner>.Arast-tabs>.Arast-tabs-menu {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    border-bottom: none;
+    padding: 0px;
+    overflow: hidden;
+}
+
+.Arast-modal-inner>.Arast-tabs>.Arast-tabs-menu>li {
+    font-family: 'Roboto Condensed', sans-serif;
+    text-transform: uppercase;
+    padding: 20px;
+    border-radius: 0;
+    margin: 0 4px 0 0;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    line-height: 1;
+}
+
+.Arast-modal-inner>.Arast-tabs>.Arast-tab,
+.Arast-modal-bg {
+    padding: 40px;
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
+
+.Arast-modal-inner label {
+    margin: 0 5px 0 0;
+}
+
+.Arast-modal-close {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    line-height: 36px;
+    height: 36px;
+    width: 36px;
+    border-radius: 100%;
+    text-align: center;
+    z-index: 99999;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+.Arast-modal-close .material-icons {
+    font-size: 20px;
+    line-height: 36px;
+}
+
+#modal-select-img .Arast-btn-set button,
+#modal-select-img .Arast-btn-set .Arast-file-field {
+    width: 50%;
+}
+
+#modal-select-img .Arast-btn-set .material-icons {
+    margin-right: 5px;
+}
+
+#modal-select-img label {
+    margin: 0;
+}
+
+#modal-empty-canvas .Arast-resize-wrap .Arast-btn {
+    min-width: 120px;
+}
+
+#modal-empty-canvas .Arast-resize-wrap {
+    margin: 0;
+}
+
+.Arast-keep {
+    display: flex;
+    padding: 20px 0 0 20px;
+    font-style: italic;
+    align-items: flex-start;
+}
+
+.Arast-keep>div {
+    margin-left: 5px;
+}
+
+#Arast-download-as-json,
+#Arast-save-as-json {
+    margin-top: 30px;
+    padding-top: 30px;
+    border-top: 1px dashed #303030;
+}
+
+.Arast-select-btn-block {
+    display: flex;
+}
+
+.Arast-select-btn-block>div:first-child {
+    width: 75%;
+    padding-right: 20px;
+    margin-right: 20px;
+    border-right: 1px dashed #303030
+}
+
+.Arast-select-btn-block>div:last-child {
+    width: 25%;
+}
+
+.Arast-select-btn-block .Arast-btn-set .Arast-btn:last-child .material-icons {
+    font-size: 0.9rem
+}
+
+/* ================= TEMPLATE LIBRARY ================== */
+
+.Arast-templates-menu-wrap {
+    display: flex;
+    margin-bottom: 30px;
+    align-items: stretch;
+    margin-top: -50px;
+    max-width: 450px;
+    margin-left: auto;
+    z-index: 2;
+}
+
+.Arast-templates-menu-wrap>* {
+    margin-right: 10px;
+}
+
+.Arast-templates-menu-wrap>*:last-child {
+    margin-right: 0;
+}
+
+.Arast-templates-menu-wrap button .material-icons {
+    margin: 0;
+    font-size: 16px;
+}
+
+.Arast-template-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-bottom: none;
+}
+
+.Arast-template-list li {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+}
+
+.Arast-template-list li.active {
+    pointer-events: none;
+}
+
+.Arast-template-list li.active button {
+    opacity: 0.5;
+}
+
+.Arast-template-list li:last-child {
+    border: none !important;
+}
+
+.Arast-template-list li div {
+    flex: 1;
+}
+
+.Arast-template-list li div:first-child {
+    font-weight: 700;
+    font-size: 1rem
+}
+
+.Arast-template-list li div:last-child {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.Arast-template-list li div:last-child button {
+    margin-left: 10px;
+    font-size: 0.8rem;
+    padding: 6px 10px;
+}
+
+#Arast-history-list li .info {
+    display: flex;
+    align-items: center;
+}
+
+#Arast-history-list li .info .material-icons {
+    min-width: 30px;
+    text-align: center;
+    font-size: 18px;
+}
+
+#Arast-history-list li .info span.time {
+    font-size: 0.9rem;
+    line-height: 1;
+    padding: 4px;
+    margin: 0 10px;
+    border-radius: 2px;
+}
+
+.Arast-history-title {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+
+}
+
+.Arast-history-title .Arast-btn {
+    font-size: 0.8rem;
+    padding: 6px 10px;
+}
+
+.Arast-history-count {
+    margin: 10px 0 0 0;
+    font-style: italic;
+    display: block;
+    text-align: right;
+}
+
+/* ================= MEDIA LIBRARY ================== */
+
+#Arast-library-all-menu,
+#Arast-library-my-menu,
+#Arast-my-templates-menu {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    align-items: center;
+}
+
+#Arast-library-all-menu>div,
+#Arast-library-my-menu>div,
+#Arast-my-templates-menu>div {
+    display: flex;
+}
+
+#Arast-all-templates-noimg,
+#Arast-library-all-noimg,
+#Arast-library-my-noimg {
+    margin: 0;
+}
+
+#Arast-img-media-library,
+#Arast-overlay-img-media-library,
+#Arast-overlay-delete {
+    margin-top: 10px;
+}
+
+.media-library-grid .Arast-img-wrap {
+    min-height: 60px;
+}
+
+/* ================= SVG LIBRARY ================== */
+
+#Arast-svg-library-all-menu,
+#Arast-svg-library-my-menu {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    align-items: center;
+}
+
+#Arast-svg-library-all-menu>div,
+#Arast-svg-library-my-menu>div {
+    display: flex;
+}
+
+#Arast-svg-library-all-noimg,
+#Arast-svg-library-my-noimg {
+    margin: 0;
+}
+
+#Arast-svg-media-library {
+    margin-top: 10px;
+}
+
+#Arast-svg-library-all .Arast-img-wrap,
+#Arast-svg-library-my .Arast-img-wrap {
+    padding: 5px
+}
+
+/* ================= MASONRY ================== */
+
+.Arast-masonry {
+    column-gap: 15px;
+    line-height: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.Arast-masonry.six-column {
+    column-count: 6;
+}
+
+.Arast-masonry.five-column {
+    column-count: 5;
+}
+
+.Arast-masonry.four-column {
+    column-count: 4;
+}
+
+.Arast-masonry.three-column {
+    column-count: 3;
+}
+
+.Arast-masonry.two-column {
+    column-count: 2;
+}
+
+.Arast-masonry.one-column {
+    column-count: 1;
+}
+
+.Arast-masonry-item {
+    position: relative;
+    break-inside: avoid;
+    margin: 0;
+    cursor: pointer;
+}
+
+.Arast-masonry-item img {
+    max-width: 100%;
+    width: 100%;
+}
+
+.Arast-masonry-item .favorite {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: none;
+    padding: 0 0 4px 4px;
+}
+
+.Arast-masonry-item:hover .favorite {
+    display: block;
+}
+
+.Arast-masonry-item .favorite .material-icons {
+    font-size: 18px
+}
+
+.Arast-masonry-item-inner {
+    position: relative;
+    margin-bottom: 15px;
+    display: inline-block;
+    width: 100%;
+}
+
+.grid-item:hover .Arast-masonry-item-inner,
+.Arast-masonry-item-inner:hover {
+    border-color: #fff;
+}
+
+.Arast-masonry-item-desc {
+    width: 100%;
+    display: none;
+    line-height: 1.1;
+    padding: 8px 4px 4px 4px;
+    font-weight: 700;
+    text-align: center;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: absolute;
+    bottom: 0;
+}
+
+.Arast-masonry-item-inner:hover .Arast-masonry-item-desc {
+    display: block;
+}
+
+.Arast-svg-library-delete,
+.Arast-library-delete {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    z-index: 9;
+    cursor: pointer;
+    line-height: 20px;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    text-align: center;
+}
+
+.Arast-svg-library-delete .material-icons,
+.Arast-library-delete .material-icons {
+    font-size: 18px;
+    line-height: 20px;
+}
+
+/* ================= FRONT-END EDITOR ================== */
+
+#Arast.frontend #modal-select-img .Arast-btn-set .Arast-file-field {
+    width: 100%;
+}
+
+#Arast.frontend .frame-favorite,
+#Arast.frontend .element-favorite,
+#Arast.frontend .template-favorite {
+    display: none !important;
+}
+
+/* ================= MEDIA QUERIES ================== */
+
+@media only screen and (max-width: 1200px) {
+    #Arast-body {
+        padding: 0 0 0 75px !important;
+    }
+
+    /*     .Arast-content-bar,
+    body.layers-closed .Arast-content-bar {
+        right: 20px;
+    } */
+}
+
+@media only screen and (max-width: 800px) {
+    .Arast-templates-menu {
+        width: 100%;
+    }
+
+    .Arast-templates-menu-wrap {
+        margin-top: 0;
+        max-width: 100%;
+    }
+
+    .Arast-select-btn-block {
+        flex-direction: column;
+    }
+
+    .Arast-select-btn-block>div,
+    .Arast-select-btn-block>div:first-child,
+    .Arast-select-btn-block>div:last-child {
+        width: 100% !important;
+        padding: 0;
+        margin: 0;
+        border: none
+    }
+
+    .Arast-select-btn-block>div:last-child {
+        margin-top: 10px;
+    }
+}
+
+@media only screen and (max-width: 575px) {
+    html {
+        font-size: 13px;
+    }
+
+    #Arast-body {
+        padding: 0 0 0 0px !important;
+    }
+
+    .arast-mobile-navbar{
+        display: block !important;
+    }
+
+    .Arast-logo img.logo-desktop {
+        display: none;
+    }
+
+
+    .NavbarTools-PaddingOpen{
+        padding-left: 17px !important;
+
+    }
+
+    .NavbarTools-PaddingClose{
+        padding-left: 17px !important;
+
+    }
+    #arast-canvas-controller{
+        margin-right: 0px !important;
+        margin-bottom: 55px !important;
+    }
+
+    .Arast-logo img.logo-mobile {
+        display: block;
+    }
+
+    #Arast-icon-panel-inner{
+        display: none;
+    }
+
+    #Arast-icon-panel{
+        display: none;
+    }
+    
+    .arast-publish-button{
+        position: static !important;
+        margin-top: 15px;
+    }
+    #Arast-icon-menu {
+        width: 54px;
+        display: none;
+    }
+
+    .Arast-icon-menu-title {
+        display: none;
+    }
+
+    button.Arast-icon-menu-btn {
+        padding: 15px 0
+    }
+
+    #Arast-icon-panel {
+        width: 315px;
+        max-width: 100%;
+        padding: 60px 0 0 54px;
+    }
+
+    #Arast-icon-panel-inner {
+        padding: 15px;
+    }
+
+    #Arast-crop-btns {
+        flex-direction: row;
+    }
+
+    .Arast-control-wrap {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .Arast-control-wrap .Arast-control,
+    .Arast-control-wrap .Arast-control-label {
+        width: 100%;
+        min-width: 100%;
+    }
+
+    .Arast-control-wrap .Arast-control-label {
+        margin-bottom: 5px;
+    }
+
+    .Arast-checkbox-control,
+    .Arast-toggle-control {
+        justify-content: flex-start;
+    }
+
+    #Arast-toggle-left {
+        left: 314px;
+    }
+
+    .arast-popup-navbar{
+        display: block  !important;
+    }
+    .Arast-grid.two-column {
+        grid-template-columns: repeat(auto-fill, minmax(min(60px, 100%), 1fr));
+    }
+
+    .Arast-btn.Arast-lg-btn {
+        padding: 14px 0px;
+    }
+
+    .Arast-modal-inner>.Arast-tabs>.Arast-tabs-menu {
+        flex-wrap: nowrap;
+    }
+
+    .Arast-modal-inner>.Arast-tabs>.Arast-tabs-menu>li {
+        padding: 20px 10px;
+        font-size: 1rem
+    }
+
+    .Arast-modal-inner>.Arast-tabs>.Arast-tabs-menu>li>.material-icons {
+        display: none;
+    }
+
+    .Arast-modal-inner>.Arast-tabs>.Arast-tab,
+    .Arast-modal-bg {
+        padding: 20px
+    }
+
+    #Arast-library-all-menu,
+    #Arast-library-my-menu,
+    #Arast-my-templates-menu {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #Arast-library-all-menu>div.Arast-search-box,
+    #Arast-library-my-menu>div.Arast-search-box,
+    #Arast-my-templates-menu>div.Arast-search-box {
+        width: 100%;
+        margin-top: 15px;
+    }
+
+    #modal-blank-canvas .Arast-control-group {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .Arast-control-group>div {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 20px
+    }
+
+    .Arast-control-group>div:last-child {
+        margin-bottom: 0
+    }
+
+    #modal-blank-canvas .sp-original-input-container {
+        width: 100%;
+    }
+
+    #Arast-canvas-create {
+        padding: 12px 0;
+        height: auto
+    }
+
+    .Arast-modal-close {
+        top: 10px;
+        right: 10px;
+    }
+
+    #modal-select-img .Arast-btn-set {
+        flex-wrap: wrap;
+    }
+
+    #modal-select-img .Arast-btn-set label,
+    #modal-select-img .Arast-btn-set button,
+    #modal-select-img .Arast-btn-set .Arast-file-field {
+        width: 100%;
+        margin: 0;
+    }
+
+    #modal-select-img .Arast-btn-set label {
+        margin-bottom: 10px
+    }
+
+    .Arast-template-list li {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .Arast-template-list li div {
+        width: 100%;
+    }
+
+    .Arast-template-list li div:last-child {
+        margin-top: 10px;
+    }
+
+    #Arast-top-bar .Arast-btn .Arast-btn-text {
+        display: none;
+    }
+
+    #Arast-top-bar .Arast-btn .material-icons {
+        margin: 0;
+        font-size: 18px;
+    }
+
+    .tooltip:after,
+    .tooltip:before {
+        display: none;
+    }
+
+    .Arast-top-bar-menu {
+        padding: 0 5px;
+    }
+
+    .Arast-content-bar,
+    body.layers-closed .Arast-content-bar {
+        right: 0px;
+        bottom: 0px;
+        border-radius: 0;
+        padding-left: 15px;
+        border-right: none !important;
+        border-bottom: none !important;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Arast Edited */
+.fullWidth {
+    width: -webkit-fill-available !important;
+}
+
+.ArastProfButtons {
+    display: grid;
+    margin-top: 10px;
+}
+
+.mb5 {
+    margin-bottom: 5px;
+}
+
+.ArastProfileName {
+    margin-right: -16px;
+}
+
+.margin-0 {
+    margin: 0px;
+}
+
+
+.NavbarTools {
+    margin-top: 51px;
+    background-color: rgb(255, 255, 255);
+    position: absolute;
+    z-index: 7;
+    width: -webkit-fill-available;
+    padding-top: 11px;
+    padding-bottom: 8px;
+}
+
+.NavbarTools-row {
+    margin-top: 4px;
+}
+
+.NavbarTools-PaddingOpen {
+    padding-left: 428px;
+    padding-right: 10px;
+}
+
+.NavbarTools-PaddingClose {
+    padding-left: 87px;
+    padding-right: 20px;
+}
+
+.detest {
+    height: 130px;
+    padding: 4px;
+    /* padding-bottom: 5px; */
+    margin-bottom: 21px;
+}
+
+
+.designsImage {
+    width: -webkit-fill-available !important;
+}
+
+
+.arast-open-panel {
+    left: 80px !important;
+    display: none;
+}
+
+
+.arast-history {
+    display: block;
+    margin-top: 60px;
+
+}
+
+
+.margin-auto {
+    margin: auto;
+}
+
+.btn-colorize {}
+
+.width-auto {
+    width: auto;
+}
+
+.position-absolute {
+    position: absolute;
+}
+
+.toolbar-text-color {
+    margin-top: 7px;
+}
+
+.toolsManager-TextTools {
+    background-color: #fff;
+    width: -webkit-fill-available;
+    height: 51px;
+    padding: 6px;
+    margin-top: 50px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 5px;
+    position: relative;
+    margin-top: 25px;
+    margin-bottom: -38px;
+}
+
+.toolsManager-TextTools-Buttons {
+    width: 68px;
+}
+
+
+.texttools-buttons {
+    width: 61px !important;
+
+}
+
+
+.material-size {
+    font-size: 23px !important;
+    padding: 0px;
+    margin-left: -6px;
+    margin-top: -2px;
+
+}
+
+
+
+.test-style {
+    stroke: rgb(0, 0, 0);
+    stroke-width: 0;
+    stroke-dasharray: none;
+    stroke-linecap: butt;
+    stroke-dashoffset: 0;
+    stroke-linejoin: miter;
+    stroke-miterlimit: 4;
+    fill: rgb(255, 0, 0);
+    fill-rule: nonzero;
+    opacity: 1;
+}
+
+
+.Arast-shape {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.Arast-shape svg {
+    width: 100%;
+    height: auto;
+    vertical-align: bottom;
+}
+
+#Arast-shapes-grid .Arast-shape {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='2' height='2'%3E%3Cpath d='M1,0H0V1H2V2H1' fill='%23FFFFFF'/%3E%3C/svg%3E") left top/contain #ccc;
+    background-size: 10px 10px;
+}
+
+#Arast-shapes-grid .Arast-shape:hover {
+    background: #6658ea;
+}
+
+#Arast-shapes-grid .Arast-shape svg * {
+    fill: #494949 !important;
+}
+
+#Arast-shapes-grid .Arast-shape:hover svg * {
+    fill: #fff !important;
+}
+
+#Arast-shape-loadmore {
+    margin-top: 20px
+}
+
+
+
+
+
+
+.arast-tabdiv-content {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    /* Center the container horizontally */
+    width: 80%;
+    /* Adjust width as needed */
+}
+
+
+
+.arast-menu-ul {
+    white-space: nowrap;
+    overflow: auto;
+    overflow-y: hidden;
+    padding: 11px;
+}
+
+.arast-menu-panel-inner {
+    height: 93% !important;
+    margin-top: -22px;
+}
+
+
+.txtLeftToRight {
+    text-align: right;
+}
+
+.arast-horizontal-content {
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+    margin-inline-start: -29px;
+    margin-inline-end: -30px;
+    overflow-y: hidden;
+}
+
+.content-horizontal {
+    height: 60%;
+    width: fit-content;
+    position: relative;
+
+}
+
+.displayInline {
+    display: inline-block;
+    max-height: 115px;
+    margin-bottom: -25px;
+}
+
+
+
+
+.width-111 {
+    width: 111%;
+}
+
+
+.dots {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.dots::after {
+    content: "...";
+}
+
+.arast-logos:hover .dots {
+    opacity: 1;
+}
+
+
+.arast-logos {
+    position: relative;
+}
+
+.popup {
+    position: fixed !important;
+}
+
+
+
+.arast-popup-text{
+    line-height: 1.5;
+}
+
+
+.arast-popup-frame {
+    position: absolute;
+    z-index: 100;
+    background-color: white;
+    width: 200px;
+    top: 30%;
+    border-radius: 9px;
+    padding: 29px;
+    text-align: center;
+    overflow: auto;
+}
+
+
+
+.arast-popup-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    direction: rtl;
+}
+
+.arast-popup-hashtags {
+    background-color: whitesmoke;
+    border-radius: 6px;
+    font-family: "MainFont";
+    font-size: 11px;
+    margin: 2px;
+    cursor: pointer;
+    flex: 0 1 auto;
+    white-space: nowrap;
+}
+
+
+.arast-popup-close {
+    position: fixed;
+    top: 31%;
+    left: 17.8%;
+    background-color: #dad1d1;
+    border: 0px;
+    border-radius: 6px;
+    /* padding: 5px; */
+    color: #ec0000;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.arast-login-div {
+    padding: 25px;
+}
+
+
+.arast-login-main {
+    margin-top: 86px;
+}
+
+
+.arast-input-login {
+    padding: 30px;
+    font-size: 20px;
+    text-align: center;
+    border-color: #008b13 !important;
+}
+
+
+.arast-login-text {
+    text-align: center;
+    margin-bottom: 17px;
+}
+
+.txt-center {
+    text-align: center;
+
+}
+
+@media (max-width: 576px) {
+    .arast-login-div {
+        bottom: 0px;
+        position: fixed;
+        left: 0px;
+        right: 0px;
+        padding: 25px;
+    }
+}
+
+.arast-login-submit {
+    text-align: center;
+    background-color: seagreen !important;
+    font-size: 20px !important;
+    font-family: 'MainFont' !important;
+    border-color: white !important;
+    height: auto !important;
+    color: azure !important;
+    margin-top: 5px;
+}
+
+
+
+
+.image-item {
+    max-width: 100%;
+    height: auto;
+}
+
+.flex-column {
+    max-width: 260px;
+}
+
+.scale {
+    transform: scaleY(1.05);
+    padding-top: 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@keyframes fade {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.fade-in-out {
+    animation: fade 2s infinite;
+}
+
+
+
+
+
+
+
+
+
+
+
+.my-masonry-grid {
+    display: flex;
+    width: auto;
+}
+
+.my-masonry-grid_column {
+    padding-left: 5px;
+    /* gutter size */
+    background-clip: padding-box;
+}
+
+/* Style your items */
+.gallery-item {
+    margin-bottom: 30px;
+}
+
+.gallery-item img {
+    width: 100%;
+    display: block;
+}
+
+
+
+
+
+.arast-search-sidebar {
+    text-align: center;
+    direction: rtl;
+    padding: 10px;
+    font-size: 17px;
+    border-radius: 10px;
+}
+
+
+
+
+
+.swiper-button-prev,
+.swiper-button-next {
+    color: #fff;
+    background-color: #333;
+    border-radius: 50%;
+    font-size: 10px !important;
+    width: 25px !important;
+    height: 25px !important;
+    margin-top: -13px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+    font-size:
+        10px !important;
+}
+
+
+
+.width-100{
+ max-width : 100%;
+}
+
+.arast-loader-sidebar{
+    background-color: #fff !important;
+    border: 0px !important;
+}
+
+.arast-collection{
+    display: flex;
+    overflow: auto;
+}
+.arast-image-collection{
+    max-width: -webkit-fill-available;
+}
+
+
+
+
+.arast-collection-row {
+    width: 165px;
+    padding: 6px;
+    margin: 0px;
+    border-radius: 15px;
+    display : flex !important;
+}
+
+
+.txt-collection{
+    text-align: right;
+    margin-bottom: 1px;
+    font-size: 13px;
+}
+
+
+.arast-logo-group{
+    margin-bottom: 14px;
+}
+
+.arast-logos-image{
+    padding: 6px;
+    margin: 0px;
+    border-radius: 15px;
+    display: flex !important;
+
+}
+
+
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.arast-input-publish{
+    padding-left : 0px;
+    text-align: right;
+    padding-right: 7px;
+}
+
+.arast-labal-input{
+    font-size: 14px;
+    opacity: 0.8;
+    margin-bottom: 4px;
+}
+
+
+.arast-colors {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px; /* فاصله بین دایره‌ها */
+    justify-content: center; /* چینش دایره‌ها در مرکز */
+    align-items: center; /* چینش عمودی در وسط */
+}
+.circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 20px;
+}
+
+.circle.selected::after {
+    content: "✔";
+    font-size: 20px;
+    color: white;
+}
+
+.circle.red { background-color: red; }
+.circle.blue { background-color: blue; }
+.circle.green { background-color: green; }
+.circle.yellow { background-color: yellow; }
+.circle.purple { background-color: purple; }
+
+#selectedColors {
+    display: none; /* مخفی کردن input */
+}
+
+
+
+.hashtag {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.hashtag-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+
+
+.arast-publish-button{
+    position: absolute;
+    right: 0;
+    left: 35px;
+    bottom: 0;
+    padding: 15px;
+    font-size: 14px;
+    background-color: crimson;
+}
+
+
+
+
+
+
+
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border-left-color: #09f;
+    animation: spin 1s ease infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* سبک برای متن */
+.loading-text {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 16px;
+    color: #ede1e1;
+    margin-right: 11px;
+}
+
+
+.arast-loading-text {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 16px;
+    margin-right: 11px;
+}
+
+/* سبک برای قرارگیری در وسط */
+.loader-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+
+
+.arast-btn-success{
+    background-color: forestgreen;
+    padding: 14px;
+    font-size: 15px;
+}
+
+.hidden {
+    display: none;
+}
+
+
+
+.arast-error-div{
+    background-color: #ed000045;
+    padding: 10px;
+    border-radius: 12px;
+}
+
+
+
+
+
+.arast-webkit{
+    max-width: -webkit-fill-available;
+}
+
+
+
+
+.arast-lable-input{
+    margin-bottom: 8px;
+}
+
+
+#Arast-img-zoom{
+    font-family: "FaNum" !important;
+}
+
+
+
+.arast-img-fonts{
+    margin-left: 15px;
+    margin-top: 5px;
+}
+
+
+
+.arast-mobile-navbar{
+    background-color: white;
+    height: 55px;
+    width: 100%;
+    position: fixed;
+    z-index: 10000000000;
+    top: auto;
+    bottom: 0;
+    display: none;
+}
+
+
+.arast-mobile-icon{
+    width: 38%;
+    margin-top: 7px;
+    position: relative;
+    left: 34%;
+}
+
+.arast-li-mobile{
+    width: 65px;
+    cursor: pointer;
+}
+
+.arast-text-navbar-mobile{
+    font-size: 10px;
+    text-align: center;
+}
+
+
+.arast-popup-navbar{
+    height: 65%;
+    width: 100%;
+    background-color: #f3f3f3fa;
+    position: fixed;
+    bottom: 52px;
+    z-index: 10;
+    padding: 29px;
+    overflow-y: auto;
+    display: none;
+}
+
+
+.arast-modal-account-text{
+    text-align: center;
+    font-size: 16px;
+}
+
+
+.arast-icon-account{
+    margin-top: -5px;
+    font-size: 30px  !important;
+
+}
+
+
+.arast-btn-account{
+    padding-top: 20px !important;
+    padding-bottom: 10px !important;
+    height: auto !important;
+    background-color: #7fffd470 !important;
+}
+
+
+.arast-pager-circle {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: #d0e6d9;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: 0px;
+  }
+
+
+  .arast-pager{
+    position: fixed;
+    z-index: 10;
+    right: 30px;
+    top: 40.5%;
+  }
+
+
+  .arast-pager-center{
+    margin-top : 10px;
+    margin-bottom : 10px;
+  }
+
+
+
+  .black-color{
+    color: black;
+  }
+
+
+
+  .loader-block{
+    display: block !important;
+  }
+
+  .arast-forbidden-security {
+    user-select: none;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  .access {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.access img {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+}
+.collaboration {
+    margin-bottom: 20px;
+}
+.collaboration input {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+.btn-copy {
+    width: 100%;
+    background-color: #8a4de9;
+    color: #fff;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 17px;
+}
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+.action-btn {
+    flex: 1 1 22%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: #333;
+    text-decoration: none;
+}
+.action-btn img {
+    width: 32px;
+    height: 32px;
+    margin-bottom: 5px;
+}
+
+
+
+
+.option-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px;
+}
+
+.icon23 {
+    width: 32px;
+    height: 32px;
+    margin-right: 10px;
+}
+
+.title23 {
+    font-weight: bold;
+    color: #333;
+    font-size: 14px;
+}
+
+.description23 {
+    display: block;
+    font-size: 12px;
+    color: #777;
+    margin-top: 2px;
+}
+
+.suggested {
+    background-color: #8a4de9;
+    color: white;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 12px;
+    margin-left: auto;
+    align-self: flex-start;
+    margin-top: 7px;
+    margin-right: 10px;
+}
+
+.css-1okebmr-indicatorSeparator {
+    display: none;
+}
+
+.css-319lph-ValueContainer {
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+}
+
+.css-1s2u09g-control {
+    padding: 5px;
+}
+
+.css-13cymwt-menu {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+
+.form-label{
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* From Uiverse.io by Timbar09 */ 
+.checkbox__container {
+    --primary-clr-1: #2bbee7;
+    --primary-clr-2: #0e728e;
+    --text-clr-1: #8f8f8f;
+  
+    --checkbox-bg-clr: #33333367;
+    --checkbox-border-clr: #55555575;
+  
+    color: var(--text-clr-1);
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    margin-bottom: 16px;
+    margin-top: -20px;
+    font-size: 17px;
+  }
+  
+  .checkbox {
+    --dimension: 1.5em;
+    --tick-dimension: 0.15em;
+  
+    appearance: none;
+    margin: 0;
+    position: relative;
+    width: var(--dimension);
+    height: var(--dimension);
+    border: 1px solid transparent;
+    border-radius: 50%;
+    cursor: pointer;
+    rotate: 45deg;
+  }
+  
+  .checkbox:checked {
+    animation: shrink 0.5s ease forwards;
+  }
+  
+  .checkbox:not(:checked) {
+    animation: grow 0.5s 0.75s ease forwards;
+  }
+  
+  @keyframes shrink {
+    0% {
+      scale: 1;
+      background-color: var(--checkbox-bg-clr);
+      border: solid 1px var(--checkbox-border-clr);
+    }
+    50% {
+      scale: 0;
+      background-color: var(--checkbox-bg-clr);
+      border: solid 1px var(--checkbox-border-clr);
+    }
+    51% {
+      scale: 0;
+      background-color: transparent;
+      border: solid 1px transparent;
+    }
+    100% {
+      scale: 1;
+      background-color: transparent;
+      border: solid 1px transparent;
+    }
+  }
+  
+  @keyframes grow {
+    0% {
+      scale: 0;
+      background-color: transparent;
+      border: solid 1px transparent;
+    }
+  
+    100% {
+      scale: 1;
+      background-color: var(--checkbox-bg-clr);
+      border: solid 1px var(--checkbox-border-clr);
+    }
+  }
+  
+  .checkbox:before,
+  .checkbox:after {
+    content: "";
+    position: absolute;
+    top: calc(50% - var(--tick-dimension) / 2);
+    left: calc(50% - var(--tick-dimension) / 2);
+    width: var(--tick-dimension);
+    height: var(--tick-dimension);
+    border-radius: 10rem;
+  }
+  
+  .checkbox::before {
+    background-color: transparent;
+    top: calc(var(--dimension) * 0.65);
+    left: 0;
+    width: var(--tick-dimension);
+  }
+  
+  .checkbox:not(:checked)::before {
+    transition: background-color 0.3s 0.5s ease-in-out, width 0.5s ease-in-out;
+  }
+  
+  .checkbox:checked::before {
+    background-color: var(--primary-clr-1);
+    top: calc(var(--dimension) * 0.65);
+    left: 0;
+    width: calc(var(--dimension) / 2);
+    transition: background-color 0.3s 0.3s ease-in-out,
+      width 0.5s 0.75s ease-in-out;
+  }
+  
+  .checkbox::after {
+    background-color: transparent;
+    top: 0;
+    left: calc((var(--dimension) * 0.5) - var(--tick-dimension));
+    height: var(--tick-dimension);
+  }
+  
+  .checkbox:not(:checked)::after {
+    transition: background-color 0.3s 0.5s ease-in-out, height 0.5s ease-in-out;
+  }
+  
+  .checkbox:checked::after {
+    background-color: var(--primary-clr-2);
+    top: 0;
+    left: calc((var(--dimension) * 0.5) - var(--tick-dimension));
+    height: calc(var(--dimension) * 0.75);
+    transition: background-color 0.3s 0.3s ease-in-out, height 0.5s 1s ease-in-out;
+  }
+  
+  .checkbox__label {
+    --hover: #cdcdcd;
+    --checked: #8f8f8f49;
+    --stroke-dimension: 0.05em;
+  
+    cursor: pointer;
+    user-select: none;
+    scale: 1.5;
+    transition: color 0.3s;
+  }
+  
+  .checkbox__label:hover {
+    color: var(--hover);
+  }
+  
+  .checkbox:checked + .checkbox__label--text {
+    color: var(--checked);
+  }
+  
+  .checkbox__label--text {
+    position: relative;
+  }
+  
+  .checkbox__label--text::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: calc(-1 * var(--stroke-dimension));
+    width: var(--stroke-dimension);
+    height: var(--stroke-dimension);
+    margin-right: 0.5em;
+    border-radius: 1em;
+  }
+  
+  .checkbox__label--text::before {
+    background-color: var(--primary-clr-1);
+    width: 0;
+    transition: width 0.5s, background-color 0.3s 0.5s;
+  }
+  
+  .checkbox:checked + .checkbox__label--text::before {
+    background-color: var(--checked);
+    width: calc(100% + var(--stroke-dimension));
+    transition: width 1.25s 0.75s, background-color 0.5s 2s;
+  }
+  
+
+
+
+  .arast-access-in{
+    width: 100%;
+    height: 100%;
+    background-color: #e7ffe566;
+    position: absolute;
+    z-index: 10000000;
+  }
+
+
+
+  .Arast-Designs-Map{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    cursor: move;
+    justify-content: center;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.design-gallery-container {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    cursor: move;
+    width: 80%;
+    margin: 0 auto;
+  }
+  
+  .design-image-container {
+    position: relative;
+    width: 150px;
+  }
+  
+  .design-gallery-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+  }
+  
+  /* افکت هاور روی تصویر */
+  .design-image-container:hover .design-gallery-image {
+    transform: scale(1.05);
+  }
+  
+  /* استایل اولیه overlay */
+  .design-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 8px;
+  }
+  
+  /* نمایان شدن overlay هنگام هاور */
+  .design-image-container:hover .design-overlay {
+    opacity: 1;
+  }
+  
+  /* استایل دکمه‌ها */
+  .design-overlay-button {
+    padding: 8px 12px;
+    font-size: 14px;
+    color: white;
+    background-color: #ff0000;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  
+  /* انیمیشن برای دکمه‌ها هنگام هاور */
+  .design-image-container:hover .design-overlay-button {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .arast-btn-cancle {
+    width: 100%;
+    background-color: #e94d74;
+    color: #fff;
+    padding: 9px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 15px;
+    margin-top: 3px;
+}
+
+
+
+/* استایل تصویر نادیده گرفته‌شده */
+.design-ignored .design-gallery-image {
+    filter: brightness(0.5); /* تاریک کردن تصویر */
+  }
+
+
+/* استایل دکمه در حالت "عدم پنهان" */
+.design-overlay-button.unignore {
+    background-color: #038021; /* رنگ سبز */
+  }

@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'Font1';
+    src: url('https://fonts.cdnfonts.com/s/84273/Alloha-51n6G.woff') format('woff2'),
+         url('https://fonts.cdnfonts.com/s/84273/Alloha-51n6G.woff') format('woff');
+    /* دیگر ویژگی‌های مربوط به فونت مانند وزن و استایل را نیز می‌توانید در اینجا تعیین کنید */
+}
+
+/* تعریف فونت‌های دیگر در اینجا */
