@@ -18,12 +18,8 @@ async function fetchData() {
     store.dispatch(SetCurrentUserSignIn(auth));
 }
 
-async function init() {
-    await fetchData();  // Now we can use await inside an async function
-}
 
-init();  
-
+await fetchData()
 store.dispatch(LoadFontsAction());
 store.dispatch(LoadCategoriesAction())
 store.dispatch(LoadInitAssetsAction())
