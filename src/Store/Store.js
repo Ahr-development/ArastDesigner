@@ -14,7 +14,7 @@ export const store = createStore(
 
 
 async function fetchData() {
-    const auth =  checkAuthenticated();
+    const auth = await checkAuthenticated();
     store.dispatch(SetCurrentUserSignIn(auth));
 }
 
