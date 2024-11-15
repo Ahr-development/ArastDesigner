@@ -14,12 +14,13 @@ export const store = createStore(
 
 
 async function fetchData() {
-    const auth = await checkAuthenticated();
+    const auth =  checkAuthenticated();
     store.dispatch(SetCurrentUserSignIn(auth));
 }
 
+    await fetchData();  // Now we can use await inside an async function
 
-await fetchData()
+
 store.dispatch(LoadFontsAction());
 store.dispatch(LoadCategoriesAction())
 store.dispatch(LoadInitAssetsAction())
