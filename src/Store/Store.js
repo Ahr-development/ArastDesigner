@@ -18,8 +18,9 @@ async function fetchData() {
     store.dispatch(SetCurrentUserSignIn(auth));
 }
 
+    await fetchData();  // Now we can use await inside an async function
 
-await fetchData()
+
 store.dispatch(LoadFontsAction());
 store.dispatch(LoadCategoriesAction())
 store.dispatch(LoadInitAssetsAction())
