@@ -44,7 +44,7 @@ const Frames = ({mode}) => {
     
             if (fontObjName === "MainFont") {
               const mainFont = fonts[0];
-              const fontURL = "https://s3.ir-thr-at1.arvanstorage.ir/" + mainFont.FontFileName;
+              const fontURL = "https://arastme.s3-website.ir-thr-at1.arvanstorage.ir/" + mainFont.FontFileName;
     
               try {
                 await fontManager.loadFontAndApplyToObject(mainFont.FontName, fontURL);
@@ -59,7 +59,7 @@ const Frames = ({mode}) => {
               for (const font of fonts.slice(1)) {
                 const sanitizedFontName = fontObjName.replace(/\d+/g, '');
                 if (font.FontName === sanitizedFontName) {
-                  const fontURL = "https://s3.ir-thr-at1.arvanstorage.ir/" + font.FontFileName;
+                  const fontURL = "https://arastme.s3-website.ir-thr-at1.arvanstorage.ir/" + font.FontFileName;
                   const random = Math.floor(Math.random() * 101);
                   try {
                     await fontManager.loadFontAndApplyToObject(font.FontName + random, fontURL);

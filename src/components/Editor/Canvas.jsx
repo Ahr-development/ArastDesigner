@@ -86,7 +86,7 @@ const Canvas = ({ link }) => {
           const mainFont = fonts[0];
           const random = Math.floor(Math.random() * 101);
 
-          const fontURL = "https://s3.ir-thr-at1.arvanstorage.ir/" + mainFont.FontFileName;
+          const fontURL = "https://arastme.s3-website.ir-thr-at1.arvanstorage.ir/" + mainFont.FontFileName;
           console.log(mainFont);
 
           try {
@@ -103,7 +103,7 @@ const Canvas = ({ link }) => {
           for (const font of fonts) {
             const sanitizedFontName = fontObjName.replace(/\d+/g, '');
             if (font.FontName === sanitizedFontName) {
-              const fontURL = "https://arastme.storage.c2.liara.space/" + font.FontFileName;
+              const fontURL = "https://arastme.s3-website.ir-thr-at1.arvanstorage.ir/" + font.FontFileName;
               const random = Math.floor(Math.random() * 101);
               try {
                 await fontManager.loadFontAndApplyToObject(font.FontName + random, fontURL);

@@ -79,7 +79,7 @@ const ExportModal = () => {
                         const font = fonts[index];
                         
                         if (font.FontName === fontFamily) {
-                            const fontUrl = `https://s3.ir-thr-at1.arvanstorage.ir/${font.FontFileName}`;
+                            const fontUrl = `https://arastme.s3-website.ir-thr-at1.arvanstorage.ir/${font.FontFileName}`;
                             
                             // بارگذاری فونت به Base64
                             const base64 = await convertFontUrlToBase64(fontUrl);

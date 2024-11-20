@@ -38,7 +38,7 @@ const TextTools = ({ object, isArray }) => {
                 value: font.FontName,
                 label: font.FontName,
                 imageUrl: config.staticFile + font.FontStaticFileName,
-                fontURL: "https://s3.ir-thr-at1.arvanstorage.ir/" + font.FontFileName,
+                fontURL: "https://arastme.s3-website.ir-thr-at1.arvanstorage.ir/" + font.FontFileName,
             }));
 
             setMappedFont(fontOptions)
