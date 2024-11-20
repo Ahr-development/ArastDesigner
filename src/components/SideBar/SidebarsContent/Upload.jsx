@@ -9,10 +9,10 @@ import { generateRandomStringwithWord } from "../../../utils/CodeGenerator";
 import Masonry from 'react-masonry-css'
 import ShowImageDynamic from "../../Common/ShowImageDynamic";
 import { debounce } from 'lodash';
+import config from '../../../Services/config.json'
 
 
-
-const Upload = ({mode}) => {
+const Upload = ({ mode }) => {
     const user = useSelector((state) => state.IUser);
     const userUploads = useSelector((state) => state.IUserUpload);
     const [selectedFile, setSelectedFile] = useState(null);
@@ -170,13 +170,16 @@ const Upload = ({mode}) => {
     }
 
 
+    // از لحاظ امنیتی اصلاح شود بعدا
+
     const handleAddToCanvas = async (Id) => {
 
-        const { data } = await GetUserUploadExpireLinkService(user.UserId, user.ServerToken, Id)
-
+       /*  const { data } = await GetUserUploadExpireLinkService(user.UserId, user.ServerToken, Id) */
+        let data = userUploads.uploads.find(u => u.Id == Id).MainFile
 
         if (data) {
             console.log(data);
+            data = config.staticFile + data
 
             fabric.Image.fromURL(data, function (img) {
                 // تنظیمات اولیه تصویر مانند مقیاس یا موقعیت
@@ -187,13 +190,13 @@ const Upload = ({mode}) => {
                     top: 100,
                     selectable: true,
                 });
-            
+
                 // اضافه کردن گروه به Canvas
                 app.canvas.add(img);
                 app.canvas.requestRenderAll();
 
             }, { crossOrigin: 'anonymous' }); // تنظیم crossOrigin برای جلوگیری از مشکلات CORS
-            
+
 
         }
     }
@@ -216,15 +219,15 @@ const Upload = ({mode}) => {
 
 
     useEffect(() => {
-        
+
         const loading = document.getElementById("arast-photos-loader")
         loading.style.display = "none"
-        
+
     }, [userUploads.userFilesLinks]);
     return (
         <>
 
-<div id={mode != null ? ("") : ("Arast-icon-panel")}>
+            <div id={mode != null ? ("") : ("Arast-icon-panel")}>
                 <div id={mode != null ? ("") : ("Arast-icon-panel-inner")}>
                     <div className="Arast-file-field">
                         <input
@@ -284,7 +287,7 @@ const Upload = ({mode}) => {
                                     ))
                                 ) : (
                                     <>
-                                    
+
                                     </>
                                 )
                             }

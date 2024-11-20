@@ -86,7 +86,7 @@ const Canvas = ({ link }) => {
           const mainFont = fonts[0];
           const random = Math.floor(Math.random() * 101);
 
-          const fontURL = "https://arastme.storage.c2.liara.space/" + mainFont.FontFileName;
+          const fontURL = "https://s3.ir-thr-at1.arvanstorage.ir/" + mainFont.FontFileName;
           console.log(mainFont);
 
           try {
