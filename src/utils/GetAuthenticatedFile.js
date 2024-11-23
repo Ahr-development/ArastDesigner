@@ -5,10 +5,10 @@ import { GetObjectCommand } from '@aws-sdk/client-s3';
 
 const client = new S3Client({
     region: "default",
-    endpoint: "https://storage.c2.liara.space",
+    endpoint: "https://s3.ir-thr-at1.arvanstorage.ir",
     credentials: {
-        accessKeyId: "pvh0qbqv0skuthhg",
-        secretAccessKey: "13dcfc0c-b437-4100-8912-b54d26cf0a9a"
+        accessKeyId: "f498e792-c551-414f-b454-fe8504b4a84c",
+        secretAccessKey: "3af1dd1d77aec9dde3ac5d3d10c8a9ac35391084d259b89b9cd62f285065d5ad"
     },
 });
 

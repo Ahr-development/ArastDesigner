@@ -132,8 +132,8 @@ const Canvas = ({ link }) => {
   useEffect(() => {
 
 
-     // مدیریت رویدادهای صفحه‌کلید برای حرکت دادن و مخفی کردن کادر
-     const handleKeyDown = (event) => {
+    // مدیریت رویدادهای صفحه‌کلید برای حرکت دادن و مخفی کردن کادر
+    const handleKeyDown = (event) => {
       if (selectedObject) {
 
         let moved = false;
@@ -335,12 +335,138 @@ const Canvas = ({ link }) => {
 
   useEffect(() => {
     adjustZoom()
-  },[drag])
+  }, [drag])
+
+  function renderDeleteIcon(ctx, left, top, styleOverride, fabricObject) {
+    var deleteIcon = "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='utf-8'%3F%3E%3C!DOCTYPE svg PUBLIC '-//W3C//DTD SVG 1.1//EN' 'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'%3E%3Csvg version='1.1' id='tm_delete_btn' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='512px' height='512px' viewBox='0 0 512 512' style='enable-background:new 0 0 512 512;' xml:space='preserve'%3E%3Ccircle style='fill:%23F44336;' cx='256' cy='256' r='256'/%3E%3Cg%3E%3Crect x='120.001' y='239.987' transform='matrix(-0.7071 -0.7071 0.7071 -0.7071 256.0091 618.0168)' style='fill:%23FFFFFF;' width='271.997' height='32'/%3E%3Crect x='240' y='119.989' transform='matrix(-0.7071 -0.7071 0.7071 -0.7071 256.0091 618.0168)' style='fill:%23FFFFFF;' width='32' height='271.997'/%3E%3C/g%3E%3C/svg%3E";
+
+    var deleteimg = document.createElement('img');
+    deleteimg.src = deleteIcon;
+
+    var size = 24;
+    ctx.save();
+    ctx.translate(left, top);
+    ctx.rotate(fabric.util.degreesToRadians(fabricObject.angle));
+    ctx.drawImage(deleteimg, -size / 2, -size / 2, size, size);
+    ctx.restore();
+  }
+
+  function addDeleteIcon(obj) {
+    const deleteControl = new fabric.Control({
+      x: 0.1, // مرکز در محور X
+      y: 0.9, // بالای آبجکت در محور Y
+      offsetX: 0, // بدون افست افقی اضافی
+      offsetY: 10, // کمی فاصله از لبه بالا آبجکت
+      cursorStyle: 'pointer', // ظاهر نشانگر موس
+      mouseUpHandler: deleteObject, // هندلر برای کلیک
+      render: (ctx, left, top, styleOverride, fabricObject) => {
+        const size = 24; // اندازه ثابت آیکون
+  
+        // تعریف آیکون
+        const deleteIcon =
+          "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FF0000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'%3E%3C/circle%3E%3Cline x1='15' y1='9' x2='9' y2='15'%3E%3C/line%3E%3Cline x1='9' y1='9' x2='15' y2='15'%3E%3C/line%3E%3C/svg%3E";
+  
+        const deleteImg = document.createElement('img');
+        deleteImg.src = deleteIcon;
+  
+        ctx.save();
+  
+        // انتقال به موقعیت کنترل
+        ctx.translate(left, top);
+  
+        // رسم آیکون
+        ctx.drawImage(deleteImg, -size / 2, -size / 2, size, size);
+        ctx.restore();
+      },
+      cornerSize: 24, // اندازه گوشه، دیگر لازم نیست
+    });
+  
+    // افزودن کنترل به آبجکت
+    obj.controls.deleteControl = deleteControl;
+  }
+  
+
+  function renderDuplicateIcon(ctx, left, top, styleOverride, fabricObject) {
+    var duplicateIcon = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' width='512' height='512' style='enable-background:new 0 0 512 512;' xml:space='preserve'%3E%3Ccircle cx='256' cy='256' r='256' style='fill:%234CAF50;'/%3E%3Cg%3E%3Crect x='144' y='144' width='224' height='224' rx='16' ry='16' style='fill:%23FFFFFF;'/%3E%3Crect x='192' y='192' width='224' height='224' rx='16' ry='16' style='fill:%23000000;opacity:0.2;'/%3E%3C/g%3E%3C/svg%3E";
+
+    var duplicateimg = document.createElement('img');
+    duplicateimg.src = duplicateIcon;
+
+    var size = 24;
+    ctx.save();
+    ctx.translate(left, top);
+    ctx.rotate(fabric.util.degreesToRadians(fabricObject.angle));
+    ctx.drawImage(duplicateimg, -size / 2, -size / 2, size, size);
+    ctx.restore();
+  }
+
+  function addDuplicateIcon(obj) {
+    const duplicateControl = new fabric.Control({
+      x: -0.1, // مرکز در محور X
+      y: 0.9, // پایین آبجکت در محور Y
+      offsetX: 0, // بدون افست افقی اضافی
+      offsetY: 10, // کمی فاصله از لبه پایین آبجکت
+      cursorStyle: 'pointer', // ظاهر نشانگر موس
+      mouseUpHandler: duplicateObject, // هندلر برای کلیک
+      render: (ctx, left, top, styleOverride, fabricObject) => {
+        const size = 24; // اندازه ثابت آیکون
+  
+        // تعریف آیکون
+        const duplicateIcon =
+          "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='8' y='8' width='12' height='12' rx='2' ry='2'%3E%3C/rect%3E%3Cpath d='M16 2H6a2 2 0 0 0-2 2v10'%3E%3C/path%3E%3C/svg%3E";
+  
+        const duplicateImg = document.createElement('img');
+        duplicateImg.src = duplicateIcon;
+  
+        ctx.save();
+  
+        // موقعیت دقیق آیکون
+        ctx.translate(left, top); // انتقال به موقعیت کنترل
+        ctx.drawImage(duplicateImg, -size / 2, -size / 2, size, size); // رسم آیکون
+        ctx.restore();
+      },
+      cornerSize: 24, // اندازه گوشه، دیگر لازم نیست
+    });
+  
+    // افزودن کنترل به آبجکت
+    obj.controls.duplicateControl = duplicateControl;
+  }
+  
 
 
 
+  function deleteObject(eventData, transform) {
+    const target = transform.target; // آبجکت مورد نظر
+    if (target) {
+      app.canvas.remove(target); // حذف آبجکت از Canvas
+      app.canvas.discardActiveObject(); // حذف انتخاب از Canvas
+      app.canvas.renderAll(); // رندر دوباره Canvas
+    }
+    debouncedSaveDesign(design[designManager.CurrentActiveDesignIndex].Id);
+
+    return false; // جلوگیری از رفتار پیش‌فرض Fabric.js
+  }
 
 
+
+  function duplicateObject(eventData, transform) {
+    const target = transform.target; // آبجکت انتخاب شده
+    if (target) {
+      target.clone((clonedObject) => {
+        clonedObject.set({
+          left: target.left + 20, // انتقال مختصات کپی به راست
+          top: target.top + 20, // انتقال مختصات کپی به پایین
+          id: new Date().getTime(), // ایجاد یک id جدید برای آبجکت کپی شده
+        });
+        app.canvas.add(clonedObject); // افزودن کپی به Canvas
+        app.canvas.setActiveObject(clonedObject); // انتخاب کپی جدید
+        app.canvas.renderAll(); // رندر دوباره Canvas
+      });
+    }
+    debouncedSaveDesign(design[designManager.CurrentActiveDesignIndex].Id);
+
+    return false; // جلوگیری از رفتار پیش‌فرض Fabric.js
+  }
 
 
 
@@ -448,7 +574,8 @@ const Canvas = ({ link }) => {
             lockLayerEvent(obj.id);
             clickLayerEvent(obj.id);
             layerNameEvent(obj.id);
-
+            addDeleteIcon(obj)
+            addDuplicateIcon(obj)
             checkLayers();
             app.canvas.renderAll();
           }

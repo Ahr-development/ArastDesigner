@@ -24,7 +24,23 @@ const TextTools = ({ object, isArray }) => {
     const [textTools, setTextTools] = useState(null);
     const [textAlign, setTextAlign] = useState(null);
     const [mappedFont, setMappedFont] = useState([]);
-    const [width, setWidth] = useState(window.innerWidth)
+    const [width, setWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+        // تابعی برای به‌روزرسانی عرض
+        const handleResize = () => {
+            setWidth(window.innerWidth);
+        };
+
+        // افزودن listener برای تغییر اندازه پنجره
+        window.addEventListener('resize', handleResize);
+
+        // پاک‌سازی listener هنگام خروج کامپوننت
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
 
     useEffect(() => {
         // رابط کاربری را هنگام تغییر color به‌روزرسانی کنید
@@ -118,33 +134,6 @@ const TextTools = ({ object, isArray }) => {
 
     }, [object])
 
-
-
-    const FontOption = (props) => {
-        return (
-            <div {...props.innerProps} style={{ display: 'flex', alignItems: 'center' }}>
-                <img src={props.data.imageUrl} alt={props.data.label} style={{ width: 40, height: 40, marginRight: 10 }} />
-                {props.data.label}
-            </div>
-        );
-    };
-
-    const SingleValue = (props) => {
-        return (
-            <div {...props.innerProps} style={{ display: 'flex', alignItems: 'center' }}>
-                <img src={props.data.imageUrl} alt={props.data.label} style={{ width: 40, height: 40, marginRight: 10 }} />
-                {props.data.label}
-            </div>
-        );
-    };
-
-    const fontOptions = [
-        { value: 'Alloha', label: 'Alloha', fontURL: 'https://fonts.cdnfonts.com/s/84273/Alloha-51n6G.woff' },
-        { value: 'IRANSansWEXB', label: 'IRANSansWEXB', fontURL: 'https://arastme-static.storage.c2.liara.space/Fonts/FontFiles/SHIA.woff' },
-        { value: 'IranNastaliqs', label: 'IranNastaliqs', fontURL: 'https://arastme-static.storage.c2.liara.space/Fonts/FontFiles/72030c30e49010e8e596e24106f843419e1f4948fe902460c4e05daa3b023e64.woff2' },
-        { value: 'Snapp', label: 'Snapp', fontURL: 'https://arastme-static.storage.c2.liara.space/Fonts/FontFiles/snapp.woff' },
-
-    ]
 
 
     const handleSetRtlText = () => {
@@ -295,7 +284,7 @@ const TextTools = ({ object, isArray }) => {
                     }
 
                 </div>
-                <div className="col-6 col-sm-5 col-md-3 " id='arast-text-font'>
+                <div className={ width <= 1100 ? "col " : "col-6 col-sm-5 col-md-4"} id='arast-text-font'>
 
                     <Select value={selectedFont}
                         onChange={handleChange}
@@ -310,20 +299,44 @@ const TextTools = ({ object, isArray }) => {
                 </div>
 
 
-                <div className='col-4 col-sm-5 col-md-4 d-sm-none d-md-block' id='arast-text-controls'>
-                    <div class="Arast-control-wrap label-block margin-auto">
-                        <div class="Arast-control">
-                            <div id="Arast-text-format-btns" class="Arast-btn-group icon-group">
-                                <button id="format-uppercase" onClick={() => handleOpenTextTools("fontSize")} type="button" class="Arast-btn custom-btn-no-border btn-1"><span class="material-icons">text_fields</span></button>
-                                <button id="format-bold" onClick={() => handleSetRtlText()} type="button" class="Arast-btn custom-btn-no-border btn-1"><span class="material-icons">format_textdirection_r_to_l</span></button>
-                                <button id="format-italic" type="button" class="Arast-btn custom-btn-no-border btn-1"><span class="material-icons">format_italic</span></button>
-                                <button id="format-underlined" type="button" class="Arast-btn custom-btn-no-border btn-1"><span class="material-icons">format_underlined</span></button>
-                                <button onClick={() => handleOpenTextTools("formatAlign")} id="format-align-center" type="button" class="Arast-btn format-align custom-btn-no-border btn-1"><span class="material-icons">{textAlign}</span></button>
+                {
 
+                    width <= 1100 ? (<>
+
+                        <div className='col-2 d-md-block' id='arast-text-controls'>
+                            <div class="Arast-control-wrap label-block margin-auto">
+                                <div class="Arast-control">
+                                    <div id="Arast-text-format-btns" class="Arast-btn-group icon-group">
+                                        <button id="format-uppercase" onClick={() => handleOpenTextTools("fontSize")} type="button" class="Arast-btn custom-btn-no-border btn-1 font-30"><span class="material-icons">more_horiz</span></button>
+
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+
+                    </>) : (
+                        <>
+                            <div className='col-4 col-sm-5 col-md-4 d-sm-none d-md-block' id='arast-text-controls'>
+                                <div class="Arast-control-wrap label-block margin-auto">
+                                    <div class="Arast-control">
+                                        <div id="Arast-text-format-btns" class="Arast-btn-group icon-group">
+                                            <button id="format-uppercase" onClick={() => handleOpenTextTools("fontSize")} type="button" class="Arast-btn custom-btn-no-border btn-1"><span class="material-icons">text_fields</span></button>
+                                            <button id="format-bold" onClick={() => handleSetRtlText()} type="button" class="Arast-btn custom-btn-no-border btn-1"><span class="material-icons">format_textdirection_r_to_l</span></button>
+                                            <button id="format-italic" type="button" class="Arast-btn custom-btn-no-border btn-1"><span class="material-icons">format_italic</span></button>
+                                            <button id="format-underlined" type="button" class="Arast-btn custom-btn-no-border btn-1"><span class="material-icons">format_underlined</span></button>
+                                            <button onClick={() => handleOpenTextTools("formatAlign")} id="format-align-center" type="button" class="Arast-btn format-align custom-btn-no-border btn-1"><span class="material-icons">{textAlign}</span></button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </>
+                    )
+                }
+
+
 
                 {openTools &&
 
@@ -331,7 +344,20 @@ const TextTools = ({ object, isArray }) => {
                         {
 
                             textTools == "fontSize" ? (<>
+                                <div className='col d-sm-none d-md-block' id='arast-text-controls'>
+                                    <div class="Arast-control-wrap label-block margin-auto">
+                                        <div class="Arast-control">
+                                            <div id="Arast-text-format-btns" class="Arast-btn-group icon-group">
+                                                <button id="format-uppercase" onClick={() => handleOpenTextTools("fontSize")} type="button" class="Arast-btn custom-btn-no-border btn-1"><span class="material-icons">text_fields</span></button>
+                                                <button id="format-bold" onClick={() => handleSetRtlText()} type="button" class="Arast-btn custom-btn-no-border btn-1"><span class="material-icons">format_textdirection_r_to_l</span></button>
+                                                <button id="format-italic" type="button" class="Arast-btn custom-btn-no-border btn-1"><span class="material-icons">format_italic</span></button>
+                                                <button id="format-underlined" type="button" class="Arast-btn custom-btn-no-border btn-1"><span class="material-icons">format_underlined</span></button>
+                                                <button onClick={() => handleOpenTextTools("formatAlign")} id="format-align-center" type="button" class="Arast-btn format-align custom-btn-no-border btn-1"><span class="material-icons">{textAlign}</span></button>
 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </>) : (<>
 
 

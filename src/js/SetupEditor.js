@@ -46,8 +46,8 @@ export function InitCanva() {
   app.canvas = new fabric.Canvas(app.c);
   app.canvas.backgroundColor = settings.canvasColor;
 
-
-
+        // Delete object control
+   
 }
 
 

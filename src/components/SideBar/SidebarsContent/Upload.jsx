@@ -178,9 +178,10 @@ const Upload = ({ mode }) => {
         let data = userUploads.uploads.find(u => u.Id == Id).MainFile
 
         if (data) {
-            console.log(data);
+            console.log(userUploads);
             data = config.staticFile + data
 
+            console.log(data);
             fabric.Image.fromURL(data, function (img) {
                 // تنظیمات اولیه تصویر مانند مقیاس یا موقعیت
                 img.set({
