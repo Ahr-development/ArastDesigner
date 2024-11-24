@@ -9,7 +9,8 @@ let initialState = {
     ResultAddCollectionModal: 0,
     ExportDesignModal: false,
     ShowAllUserDesignsModal: false,
-
+    EditTextBoxContentModal: false,
+    TextBoxIdChangeContent : 0,
 };
 
 
@@ -54,7 +55,12 @@ export const ModalControlReducer = (state = initialState, action) => {
                             ShowAllUserDesignsModal: action.payload,
                         };
             
-
+                        case actionType.SET_EDIT_TEXTBOX_CONTENT_MODAL:
+                            return {
+                                ...state,
+                                EditTextBoxContentModal: action.payload.EditTextBoxContentModal,
+                                TextBoxIdChangeContent : action.payload.TextBoxIdChangeContent
+                            };
         default:
             return state;
     }

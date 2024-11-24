@@ -7,6 +7,7 @@ import { setExportModalAction, setShowModalAllChildrenDesign } from "../../Actio
 import ExportModal from "../Modal/ExportModal";
 import ShowAllUserDesigns from "../Modal/ShowAllUserDesigns";
 import  Swal  from 'sweetalert2';
+import TextBoxChangeContentModal from "../Modal/TextBoxChangeContentModal";
 
 
 
@@ -252,6 +253,19 @@ const MainNavbar = () => {
 
             </>)
         }
+
+
+
+{
+            modal.EditTextBoxContentModal ? (<>
+                <TextBoxChangeContentModal />
+
+            </>) : (<>
+
+
+            </>)
+        }
+
 
 
     </>

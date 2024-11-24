@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ChangeDesignIndexAction, setActiveObject, setChangeDesignAction, setChangeLastDesignLength, setSelectionObjects, setStartEnableNewDesign, updateHistory, updateInitAppAction } from "../../Actions/InitAppAction";
+import { ChangeDesignIndexAction, setActiveObject, setChangeDesignAction, setChangeLastDesignLength, setEditTextBoxContentModalAction, setSelectionObjects, setStartEnableNewDesign, updateHistory, updateInitAppAction } from "../../Actions/InitAppAction";
 import { setFileName } from "../../js/Arast";
 import { InitCanva, adjustElementWidth, adjustZoom, adjustZoomValue, checkLayers, clickLayerEvent, cloneLayerEvent, deleteLayerEvent, init, layerNameEvent, lockLayerEvent, visibilityLayerEvent } from "../../js/SetupEditor";
 import Draggable from 'react-draggable';
@@ -337,6 +337,65 @@ const Canvas = ({ link }) => {
     adjustZoom()
   }, [drag])
 
+
+
+  function editObject(eventData, transform) {
+    const target = transform.target; // دریافت آبجکت انتخاب‌شده
+
+    if (target.type === 'textbox') {
+
+      const data = {
+        EditTextBoxContentModal: true,
+        TextBoxIdChangeContent: target.id,
+      }
+
+
+      dispatch(setEditTextBoxContentModalAction(data))
+
+      return true; // اتمام رویداد
+    } else {
+      alert("This control is for editing text objects only.");
+      return false;
+    }
+  }
+
+
+
+
+  function addEditIcon(obj) {
+    const editControl = new fabric.Control({
+
+      x: -0.001, // مرکز در محور X
+      y: 0.9, // بالای آبجکت در محور Y
+      offsetX: 0, // بدون افست افقی اضافی
+      offsetY: 10, // کمی فاصله از لبه بالا آبجکت      cursorStyle: 'pointer', // ظاهر نشانگر موس
+      mouseUpHandler: editObject, // هندلر برای کلیک روی آیکون
+      render: (ctx, left, top, styleOverride, fabricObject) => {
+        const size = 24; // اندازه ثابت آیکون
+
+        // تعریف آیکون ویرایش (SVG مداد)
+        const editIcon =
+          "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230000FF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 20h9'%3E%3C/path%3E%3Cpath d='M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z'%3E%3C/path%3E%3C/svg%3E";
+
+        const editImg = document.createElement('img');
+        editImg.src = editIcon;
+
+        ctx.save();
+
+        // انتقال به موقعیت کنترل
+        ctx.translate(left, top);
+
+        // رسم آیکون
+        ctx.drawImage(editImg, -size / 2, -size / 2, size, size);
+        ctx.restore();
+      },
+      cornerSize: 24, // اندازه گوشه
+    });
+
+    // افزودن کنترل به آبجکت
+    obj.controls.editControl = editControl;
+  }
+
   function renderDeleteIcon(ctx, left, top, styleOverride, fabricObject) {
     var deleteIcon = "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='utf-8'%3F%3E%3C!DOCTYPE svg PUBLIC '-//W3C//DTD SVG 1.1//EN' 'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'%3E%3Csvg version='1.1' id='tm_delete_btn' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='512px' height='512px' viewBox='0 0 512 512' style='enable-background:new 0 0 512 512;' xml:space='preserve'%3E%3Ccircle style='fill:%23F44336;' cx='256' cy='256' r='256'/%3E%3Cg%3E%3Crect x='120.001' y='239.987' transform='matrix(-0.7071 -0.7071 0.7071 -0.7071 256.0091 618.0168)' style='fill:%23FFFFFF;' width='271.997' height='32'/%3E%3Crect x='240' y='119.989' transform='matrix(-0.7071 -0.7071 0.7071 -0.7071 256.0091 618.0168)' style='fill:%23FFFFFF;' width='32' height='271.997'/%3E%3C/g%3E%3C/svg%3E";
 
@@ -361,30 +420,30 @@ const Canvas = ({ link }) => {
       mouseUpHandler: deleteObject, // هندلر برای کلیک
       render: (ctx, left, top, styleOverride, fabricObject) => {
         const size = 24; // اندازه ثابت آیکون
-  
+
         // تعریف آیکون
         const deleteIcon =
           "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FF0000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'%3E%3C/circle%3E%3Cline x1='15' y1='9' x2='9' y2='15'%3E%3C/line%3E%3Cline x1='9' y1='9' x2='15' y2='15'%3E%3C/line%3E%3C/svg%3E";
-  
+
         const deleteImg = document.createElement('img');
         deleteImg.src = deleteIcon;
-  
+
         ctx.save();
-  
+
         // انتقال به موقعیت کنترل
         ctx.translate(left, top);
-  
+
         // رسم آیکون
         ctx.drawImage(deleteImg, -size / 2, -size / 2, size, size);
         ctx.restore();
       },
       cornerSize: 24, // اندازه گوشه، دیگر لازم نیست
     });
-  
+
     // افزودن کنترل به آبجکت
     obj.controls.deleteControl = deleteControl;
   }
-  
+
 
   function renderDuplicateIcon(ctx, left, top, styleOverride, fabricObject) {
     var duplicateIcon = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' width='512' height='512' style='enable-background:new 0 0 512 512;' xml:space='preserve'%3E%3Ccircle cx='256' cy='256' r='256' style='fill:%234CAF50;'/%3E%3Cg%3E%3Crect x='144' y='144' width='224' height='224' rx='16' ry='16' style='fill:%23FFFFFF;'/%3E%3Crect x='192' y='192' width='224' height='224' rx='16' ry='16' style='fill:%23000000;opacity:0.2;'/%3E%3C/g%3E%3C/svg%3E";
@@ -410,16 +469,16 @@ const Canvas = ({ link }) => {
       mouseUpHandler: duplicateObject, // هندلر برای کلیک
       render: (ctx, left, top, styleOverride, fabricObject) => {
         const size = 24; // اندازه ثابت آیکون
-  
+
         // تعریف آیکون
         const duplicateIcon =
           "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='8' y='8' width='12' height='12' rx='2' ry='2'%3E%3C/rect%3E%3Cpath d='M16 2H6a2 2 0 0 0-2 2v10'%3E%3C/path%3E%3C/svg%3E";
-  
+
         const duplicateImg = document.createElement('img');
         duplicateImg.src = duplicateIcon;
-  
+
         ctx.save();
-  
+
         // موقعیت دقیق آیکون
         ctx.translate(left, top); // انتقال به موقعیت کنترل
         ctx.drawImage(duplicateImg, -size / 2, -size / 2, size, size); // رسم آیکون
@@ -427,11 +486,11 @@ const Canvas = ({ link }) => {
       },
       cornerSize: 24, // اندازه گوشه، دیگر لازم نیست
     });
-  
+
     // افزودن کنترل به آبجکت
     obj.controls.duplicateControl = duplicateControl;
   }
-  
+
 
 
 
@@ -522,6 +581,7 @@ const Canvas = ({ link }) => {
             if (obj.type == "textbox") {
               layerName = obj.text;
               layerIcon = 'title';
+              addEditIcon(obj)
             }
 
             if (obj.visible === false) {

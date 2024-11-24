@@ -144,3 +144,11 @@ export const ChangeDesignIndexAction = (parameter) => ({
     payload: parameter,
 
 });
+
+
+
+export const setEditTextBoxContentModalAction = (parameter) => ({
+    type: actionType.SET_EDIT_TEXTBOX_CONTENT_MODAL,
+    payload: parameter,
+
+});

@@ -4116,3 +4116,22 @@ ul.Arast-accordion>li>a>.data-count {
   .font-30{
     font-size: 30px !important;
   }
+
+
+    /* راست‌چین کردن متن در ویرایشگر */
+    #editor .ql-editor {
+        direction: rtl;
+        text-align: right;
+        font-family: 'Tahoma', 'Arial', sans-serif; /* فونت فارسی مناسب */
+        height: 200px;
+        font-size: 25px !important;
+
+      }
+
+
+      #editor .ql-editor p{
+  
+        font-size: 25px !important;
+
+      }
+
