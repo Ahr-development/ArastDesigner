@@ -45,8 +45,14 @@ const TextBoxChangeContentModal = () => {
             // دریافت محتوای ویرایش‌شده به‌صورت متن ساده
             const updatedContent = quill.getText().trim(); // حذف فاصله‌های اضافی
     
-            // ذخیره متن جدید در obj.text
-            text.text = updatedContent;
+            // تابعی برای اعمال RTL به متن
+            const formatRTLText = (textContent) => {
+                const cleanText = textContent.replace(/\u202B|\u202C/g, ""); // حذف کاراکترهای کنترلی قبلی
+                return `\u202B${cleanText}\u202C`; // افزودن کاراکترهای RTL
+            };
+    
+            // اعمال تغییرات متن به همراه مدیریت راست‌چین
+            text.text = formatRTLText(updatedContent);
     
             // بازآفرینی Canvas برای نمایش تغییرات
             app.canvas.renderAll();

@@ -1,5 +1,7 @@
 {
     "apiLink":"https://access.arastdev.ir",
-    "staticFile":"https://arastme.s3-website.ir-thr-at1.arvanstorage.ir/"
+    "staticFile":"https://arastme.s3-website.ir-thr-at1.arvanstorage.ir/",
+    "pixabay": "https://pixabay.com/api",
+    "pixabay_key": "47323150-2dc4fc719203492a540d3038d"
 
 }

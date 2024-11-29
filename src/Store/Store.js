@@ -1,7 +1,7 @@
 import { createStore } from "redux";
 import { applyMiddleware, compose } from "redux";
 import { reducers } from "../Reducers/ReducersCombind";
-import { LoadCategoriesAction, LoadFontsAction, LoadInitAssetsAction } from "../Actions/AssetsAction";
+import { getPhotosApiByPixabayApiAction, LoadCategoriesAction, LoadFontsAction, LoadInitAssetsAction } from "../Actions/AssetsAction";
 import { thunk } from 'redux-thunk';
 import { SetCurrentUserSignIn, UserUploadsAction } from "../Actions/UserAction";
 import { checkAuthenticated } from "../utils/checkAuthenticated";
@@ -24,3 +24,4 @@ async function fetchData() {
 store.dispatch(LoadFontsAction());
 store.dispatch(LoadCategoriesAction())
 store.dispatch(LoadInitAssetsAction())
+store.dispatch(getPhotosApiByPixabayApiAction())

@@ -14,7 +14,7 @@ const ExportModal = () => {
     const [exportStatus, setExportStatus] = useState(false)
     const [pdfExport, setPdfExport] = useState(false)
 
-    const [selectedExport, setSelectedExport] = useState()
+    const [selectedExport, setSelectedExport] = useState("png")
     const app = useSelector((state) => state.InitApp);
     const fonts = useSelector((state) => state.IFonts);
 

@@ -112,7 +112,7 @@ const Upload = ({ mode }) => {
             setTimeout(() => {
                 dispatch(UserUploadsAction(user.UserId, user.ServerToken, userUploads.pages.uploadPage));
                 setUploadComplete(false)
-
+                fetchSignedUrls()
             }, 500); // می‌توانید این مقدار را بر اساس نیاز خود تنظیم کنید
 
 

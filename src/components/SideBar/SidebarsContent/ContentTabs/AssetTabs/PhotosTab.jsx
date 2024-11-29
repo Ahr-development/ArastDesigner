@@ -14,6 +14,9 @@ import { setPopup } from '../../../../../Actions/InitAppAction';
 import Masonry from 'react-masonry-css';
 import config from "../../../../../Services/config.json"
 import { GetAssetExpireLinkService } from '../../../../../Services/assetService';
+import translate from "translate-google";
+import { debounce } from "lodash";
+import { SearchImageByQueryAction } from '../../../../../Actions/AssetsAction';
 
 
 
@@ -45,6 +48,23 @@ const PhotosTab = () => {
         dispatch(setPopup(popup))
     }
 
+    const searchByQuery = debounce(async (query) => {
+        try {
+            const translatedText = await translate(query, { from: "fa", to: "en" });
+    
+            if (translatedText) {
+                const { data } = await SearchImageService(translatedText);
+    
+                if (data) {
+                    dispatch(SearchImageByQueryAction(query));
+                }
+            }
+        } catch (error) {
+            console.error("Error in searchByQuery:", error);
+        }
+    }, 300); // زمان تأخیر 300 میلی‌ثانیه
+    
+
     useEffect(() => {
 
         fetch('/json/animateLoader.json')
@@ -65,8 +85,55 @@ const PhotosTab = () => {
 
     }, [])
 
+    const handleAddToCanvas = async (url) => {
 
-    const handleAddToCanvas = async (Id) => {
+   
+        if (url) {
+
+            fabric.Image.fromURL(url, function (img) {
+                // تنظیمات اولیه تصویر مانند مقیاس یا موقعیت
+                img.set({
+                    angle: 0,
+                    opacity: 1.0,
+                    left: 100,
+                    top: 100,
+                    selectable: true,
+                });
+
+
+
+                var canvasWidth = app.originalWidth
+                var canvasHeight = app.originalHeight
+            
+                // اندازه اصلی تصویر
+                var imgWidth = img.width;
+                var imgHeight = img.height;
+            
+                // محاسبه مقیاس متناسب
+                var scaleX = canvasWidth / imgWidth;
+                var scaleY = canvasHeight / imgHeight;
+                var scale = Math.min(scaleX, scaleY);
+            
+                // اعمال مقیاس به تصویر
+                img.scale(scale);
+
+
+
+            
+                // اضافه کردن گروه به Canvas
+                app.canvas.add(img);
+                app.canvas.requestRenderAll();
+                setAccessInPhotos(false)
+
+            }, { crossOrigin: 'anonymous' }); // تنظیم crossOrigin برای جلوگیری از مشکلات CORS
+            
+
+        }
+    }
+
+
+
+ /*    const handleAddToCanvas = async (Id) => {
 
         setAccessInPhotos(true)
         const { data } = await GetAssetExpireLinkService(user.UserId, user.ServerToken, Id)
@@ -114,7 +181,7 @@ const PhotosTab = () => {
             
 
         }
-    }
+    } */
 
     return (
         <>
@@ -126,7 +193,7 @@ const PhotosTab = () => {
                     <div className=''>
 
                         <div className='row'>
-                            <input placeholder='جستجو...' className='text-center input arast-search-sidebar' />
+                            <input onChange={(e) => searchByQuery(e.target.value) } placeholder='جستجو...' className='text-center input arast-search-sidebar' />
                         </div>
                         <br />
                         <Swiper
@@ -214,9 +281,9 @@ const PhotosTab = () => {
                                     columnClassName="my-masonry-grid_column">
 
                                     {
-                                        assets.photos.map(element => (
+                                        assets.photos.hits.map(element => (
                                             <div className=" arast-logos" >
-                                                <img className="width-100" src={config.staticFile + element.AssetsStaticFile} onClick={() => handleAddToCanvas(element.Id)} />
+                                                <img className="width-100" src={element.previewURL} onClick={() => handleAddToCanvas(element.largeImageURL)} />
                                                 <div class="dots" onClick={() => openPopup(12)} ></div>
                                                 <div class="popup"></div>
 
