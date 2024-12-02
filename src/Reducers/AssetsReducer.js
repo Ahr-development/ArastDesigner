@@ -50,16 +50,6 @@ export const AssetsReducer = (state = initialState, action) => {
                 photos: [...state.photos, ...action.payload]
             };
 
-
-            
-
-        case actionType.PHOTOS_ASSETS_SEARCH:
-            return {
-                ...state,
-                photos: action.payload
-            };
-
-
         case actionType.STICKERS_ASSETS:
             return {
                 ...state,

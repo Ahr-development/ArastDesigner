@@ -1,4 +1,4 @@
-import { GetAllCategoriesAndSubCategory, GetAllFonts, GetRandomFilesService, GetSomeAssetsByCategories, getInitAssetsService, getMoreAssetsByCategoryIdService } from "../Services/assetService";
+import { GetAllCategoriesAndSubCategory, GetAllFonts, GetSomeAssetsByCategories, getInitAssetsService, getMoreAssetsByCategoryIdService } from "../Services/assetService";
 import * as actionType from "./../actionTypes";
 
 
@@ -47,22 +47,6 @@ export const LoadMorePhotosAssetAction = (object) => ({
     payload: object,
 
 });
-
-export const SearchImageByQueryAction = (object) => ({
-    type: actionType.PHOTOS_ASSETS_SEARCH,
-    payload: object,
-
-});
-
-
-
-export const getPhotosApiByPixabayApiAction = () => {
-    return async dispatch => {
-        const {data} = await GetRandomFilesService();
-        await dispatch({type:actionType.PHOTOS_ASSETS,payload:data});
-
-    }
-}
 
 /* export const LoadAssetsByCategoriesAction =() => {
     return async dispatch => {

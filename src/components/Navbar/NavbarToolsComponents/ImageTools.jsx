@@ -24,8 +24,6 @@ const ImageTools = ({ object, isArray }) => {
         const lockBtn =  document.getElementById("arast-lock-image")
         lockBtn.innerText = object.selectable ? ("باز شد") : ("قفل شد")
         lockBtn.classList.add("active")
-        app.canvas.discardActiveObject(); // دی‌سلکت کردن آبجکت فعال
-
     }
 
     return (<>

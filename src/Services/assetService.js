@@ -48,25 +48,3 @@ export const GetAssetInfoService = (AssetId) => {
 export const GetAssetExpireLinkService = (UserId,Stoken,AssetId) => {
     return api.post(`${config.apiLink}/api/asset/getAssetFileExpirePrivateLink`, JSON.stringify({ UserId,Stoken,AssetId }));
 }
-
-
-export const SearchImageService = (query) => {
-    return api.get(`${config.pixabay}`, {
-        params: {
-            key: config.pixabay_key, // کلید API
-            q: query, // متن جستجو
-            per_page: 30, // تعداد نتایج
-        },
-    });
-};
-
-
-export const GetRandomFilesService = () => {
-    return api.get(`${config.pixabay}`, {
-        params: {
-            key: config.pixabay_key, // کلید API
-            per_page: 100, // تعداد تصاویر
-            order: "popular", // مرتب‌سازی بر اساس محبوبیت
-        },
-    });
-};

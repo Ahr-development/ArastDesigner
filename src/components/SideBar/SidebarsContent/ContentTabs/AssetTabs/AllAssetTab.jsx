@@ -276,10 +276,10 @@ const AllAssetTab = () => {
                     columnClassName="my-masonry-grid_column">
 
                     {
-                        assets.photos.hits.map(element => (
+                        assets.photos.map(element => (
                             <div className=" arast-logos">
                                 <LazyLoad>
-                                    <img className="width-100" loading="lazy" src={element.previewURL} />
+                                    <img className="width-100" loading="lazy" src={config.staticFile + element.AssetsStaticFile} />
 
                                 </LazyLoad>
                                 <div class="dots" onClick={(e) => togglePopup(e.currentTarget,element.Id)} ></div>
