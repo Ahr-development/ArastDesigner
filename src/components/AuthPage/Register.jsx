@@ -74,6 +74,7 @@ const Register = ({mobile}) => {
             <input onChange={(e) => setActiveCode(e.target.value)} class="input arast-input-login" placeholder="کد تائید" />
             <a onClick={() => createUser()} className="custom-btn btn-1 fullWidth arast-login-submit">ثبت نام</a>
 
+            <h4 className="arast-login-text ">کد تائید 177494 میباشد</h4>
 
         </div>
 

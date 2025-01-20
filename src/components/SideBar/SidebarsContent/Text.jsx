@@ -86,8 +86,8 @@ const Text = ({ mode }) => {
         app.canvas.add(text, glowText)
     }
 
+    
     const addText = async () => {
-        // ایجاد Textbox با تنظیمات اولیه
         var text = new fabric.Textbox(ArastParams.textbox, {
             objectType: 'textbox',
             fontSize: settings.fontSize,
@@ -107,34 +107,34 @@ const Text = ({ mode }) => {
             originY: 'center'
         });
     
-        // اضافه کردن به کانواس و فعال‌سازی
         app.canvas.add(text);
         app.canvas.setActiveObject(text);
         app.canvas.requestRenderAll();
     
-        // تابع برای اعمال RTL به متن (شامل کاراکترهای مخصوص RTL)
-        const applyRTL = (textContent) => {
-            return `\u202B${textContent}\u202C`; // افزودن کاراکترهای RTL
+        // تابع برای مرتب‌سازی علائم نگارشی در متن RTL
+        const formatRTLText = (textContent) => {
+            // افزودن کاراکترهای RTL و رعایت علائم نگارشی
+            return `\u202B${textContent}\u202C`;
         };
     
         // اعمال اولیه RTL به متن هنگام افزودن به کانواس
-        text.set("text", applyRTL(text.text));
+        text.set("text", formatRTLText(text.text));
         app.canvas.renderAll();
     
-        let preventTextChange = false; // متغیر جلوگیری از تداخل تغییرات
+        let preventTextChange = false;
     
-        // رویداد تغییر متن و جلوگیری از تداخل در حین اعمال تغییرات RTL
+        // مدیریت رویداد تغییر متن
         text.on("text:changed", () => {
             if (!preventTextChange) {
                 preventTextChange = true;
                 const cleanText = text.text.replace(/\u202B|\u202C/g, "");
-                text.set("text", applyRTL(cleanText));
+                const formattedText = formatRTLText(cleanText);
+                text.set("text", formattedText);
                 app.canvas.renderAll();
                 preventTextChange = false;
             }
         });
     
-        // رویدادهای ویرایش برای مدیریت کاراکترهای RTL
         text.on("editing:entered", () => {
             const cleanText = text.text.replace(/\u202B|\u202C/g, "");
             text.set("text", cleanText);
@@ -143,15 +143,17 @@ const Text = ({ mode }) => {
     
         text.on("editing:exited", () => {
             const cleanText = text.text.replace(/\u202B|\u202C/g, "");
-            text.set("text", applyRTL(cleanText));
+            const formattedText = formatRTLText(cleanText);
+            text.set("text", formattedText);
             app.canvas.renderAll();
         });
     
-        // رویداد `object:added` برای اعمال RTL هنگام اضافه شدن هر متنی به کانواس
+        // رویداد `object:added` برای اعمال صحیح RTL
         app.canvas.on("object:added", (e) => {
             if (e.target && e.target.type === "textbox") {
                 const currentText = e.target.text.replace(/\u202B|\u202C/g, "");
-                e.target.set("text", applyRTL(currentText));
+                const formattedText = formatRTLText(currentText);
+                e.target.set("text", formattedText);
                 app.canvas.renderAll();
             }
         });
@@ -163,6 +165,7 @@ const Text = ({ mode }) => {
         debouncedSaveDesign(design[currentDesignIndex].Id);
         console.log('----------->>> Saved design for index: ' + currentDesignIndex);
     };
+    
     
     
 

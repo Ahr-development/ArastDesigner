@@ -46,6 +46,7 @@ const Activate = ({ mobile }) => {
             <input onChange={(e) => setActiveCode(e.target.value)} class="input arast-input-login" placeholder="کد تائید" />
             <a onClick={() => activeAccount()} className="custom-btn btn-1 fullWidth arast-login-submit">ورود به حساب</a>
 
+            <h4 className="arast-login-text ">کد تائید 177494 میباشد</h4>
 
         </div>
 

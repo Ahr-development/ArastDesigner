@@ -25,6 +25,7 @@ export const LoadCategoriesAction =() => {
 
 
 
+
 export const LoadInitAssetsAction =() => {
     return async dispatch => {
         const {data} = await getInitAssetsService();
