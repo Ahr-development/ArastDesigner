@@ -13,8 +13,18 @@ const Authenticate = () => {
 
 
     useEffect(() => {
-        const browserUUID = localStorage.getItem('browserUUID') || uuidv4();
-        localStorage.setItem('browserUUID', browserUUID); // اطمینان از ذخیره UUID
+        let browserUUID = Cookies.get("browserUUID");
+
+        if (!browserUUID) {
+            // اگر مقدار موجود نبود، مقدار جدید بساز و ذخیره کن
+            browserUUID = uuidv4();
+            Cookies.set("browserUUID", browserUUID, {
+                expires: 365, // اعتبار به مدت 1 سال
+                path: "/", // در تمام صفحات معتبر باشد
+                domain: ".arastdev.ir", // اشتراک‌گذاری بین ساب‌دامین‌ها
+            });
+        }
+
     },[])
 
 

@@ -15,16 +15,29 @@ const Register = ({mobile}) => {
     const [family, setFamily] = useState(null)
 
     const createUser = async () => {
-        const browserUUID = localStorage.getItem('browserUUID') || uuidv4();
-        localStorage.setItem('browserUUID', browserUUID); // اطمینان از ذخیره UUID
+        let browserUUID = Cookies.get("browserUUID");
 
+        if (!browserUUID) {
+            // اگر مقدار موجود نبود، مقدار جدید بساز و ذخیره کن
+            browserUUID = uuidv4();
+            Cookies.set("browserUUID", browserUUID, {
+                expires: 365, // اعتبار به مدت 1 سال
+                path: "/", // در تمام صفحات معتبر باشد
+                domain: ".arastdev.ir", // اشتراک‌گذاری بین ساب‌دامین‌ها
+            });
+        }
 
         if (name != null && family != null && activeCode != null) {
             
             const token = await RegisterUser(mobile,name,family,activeCode,browserUUID)
 
-            Cookies.set('ArastAuthorize',JSON.stringify(token), {expires : 90 })
-    
+            Cookies.set('ArastAuthorize', JSON.stringify(data), {
+                path: '/',
+                domain: '.arastdev.ir',
+                secure: true,
+                sameSite: 'None',
+                expires: 90
+            });    
             Swal.fire({
                 icon: "success",
                 title: "ثبت نام موفقیت آمیز",
