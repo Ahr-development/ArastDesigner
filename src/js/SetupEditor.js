@@ -41,6 +41,7 @@ export function InitCanva() {
   fabric.Object.prototype.erasable = false;
 
 
+  
   /* Create Canvas */
   app.c = document.querySelector('#Arast-canvas');
   app.canvas = new fabric.Canvas(app.c);
